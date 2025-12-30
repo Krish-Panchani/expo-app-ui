@@ -133,8 +133,8 @@ async function addComponent(componentName, options = {}) {
   const templatesDir = path.join(packageDir, 'templates');
   
   const kebabName = toKebabCase(componentName);
-  const templatePath = path.join(templatesDir, `${kebabName}.tsx`);
-  const targetPath = path.join(config.getComponentsDir(), `${toPascalCase(kebabName)}.tsx`);
+  const templatePath = path.join(templatesDir, 'components', 'ui', `${kebabName}.tsx`);
+  const targetPath = path.join(config.getComponentsDir(), `${kebabName}.tsx`);
 
   try {
     logger.debug(`Looking for template: ${templatePath}`);
@@ -211,7 +211,8 @@ async function addComponent(componentName, options = {}) {
       logger.error(`Component "${componentName}" not found.`);
       logger.warning('Available components:');
       
-      const templates = listTemplates(templatesDir);
+      const componentsTemplateDir = path.join(templatesDir, 'components', 'ui');
+      const templates = listTemplates(componentsTemplateDir);
       
       if (templates.length === 0) {
         logger.gray('  No components available.');
@@ -224,6 +225,125 @@ async function addComponent(componentName, options = {}) {
     }
     throw error;
   }
+}
+
+/**
+ * Add a context file
+ */
+async function addContext(contextName, options = {}) {
+  const logger = options.logger || new Logger();
+  const config = options.config;
+  const projectRoot = config.projectRoot;
+  const packageDir = getPackageDir();
+  const templatesDir = path.join(packageDir, 'templates');
+  
+  const kebabName = toKebabCase(contextName);
+  const templatePath = path.join(templatesDir, 'context', `${kebabName}.tsx`);
+  const contextDir = path.join(projectRoot, 'context');
+  const targetPath = path.join(contextDir, `${toPascalCase(kebabName)}.tsx`);
+
+  try {
+    logger.debug(`Looking for template: ${templatePath}`);
+    
+    const content = await readTemplate(templatePath);
+    const validatedPath = await writeFile(
+      targetPath,
+      content,
+      projectRoot,
+      options.overwrite || false
+    );
+
+    if (!options.silent) {
+      logger.success(`Added ${contextName} context to ${path.relative(projectRoot, validatedPath)}`);
+    }
+    
+    return true;
+  } catch (error) {
+    if (error instanceof TemplateNotFoundError) {
+      logger.error(`Context "${contextName}" not found.`);
+      throw error;
+    }
+    throw error;
+  }
+}
+
+/**
+ * Add top loading bar (context + component combo)
+ */
+async function addTopLoadingBar(options = {}) {
+  const logger = options.logger || new Logger();
+  const config = options.config;
+  const projectRoot = config.projectRoot;
+  const packageDir = getPackageDir();
+  const templatesDir = path.join(packageDir, 'templates');
+  const overwrite = options.overwrite || false;
+  
+  logger.info('Adding Top Loading Bar (context + component)...\n');
+  
+  // Add loading-bar component first
+  const loadingBarPath = path.join(templatesDir, 'components', 'ui', 'loading-bar.tsx');
+  if (fs.existsSync(loadingBarPath)) {
+    const componentsDir = config.getComponentsDir();
+    const targetComponentPath = path.join(componentsDir, 'loading-bar.tsx');
+    
+    const content = await readTemplate(loadingBarPath);
+    const validatedPath = await writeFile(
+      targetComponentPath,
+      content,
+      projectRoot,
+      overwrite
+    );
+    logger.success(`Added loading-bar component to ${path.relative(projectRoot, validatedPath)}`);
+  } else {
+    throw new TemplateNotFoundError('loading-bar');
+  }
+  
+  // Add top-loading-bar-context
+  const contextPath = path.join(templatesDir, 'context', 'top-loading-bar-context.tsx');
+  if (fs.existsSync(contextPath)) {
+    const contextDir = path.join(projectRoot, 'context');
+    const targetContextPath = path.join(contextDir, 'top-loading-bar-context.tsx');
+    
+    const content = await readTemplate(contextPath);
+    const validatedPath = await writeFile(
+      targetContextPath,
+      content,
+      projectRoot,
+      overwrite
+    );
+    logger.success(`Added top-loading-bar-context to ${path.relative(projectRoot, validatedPath)}`);
+  } else {
+    throw new TemplateNotFoundError('top-loading-bar-context');
+  }
+  
+  logger.info('\n📝 Next steps:');
+  logger.info('1. Wrap your root _layout.tsx with <LoadingProvider>:');
+  logger.gray(`
+   import { LoadingProvider } from "@/context/top-loading-bar-context";
+   
+   export default function RootLayout() {
+     return (
+       <LoadingProvider color="#007AFF">
+         {/* Your app content */}
+       </LoadingProvider>
+     );
+   }
+  `);
+  
+  logger.info('2. Use the hook in your components:');
+  logger.gray(`
+   import { useTopLoadingBar } from "@/context/top-loading-bar-context";
+   
+   const { showLoading, hideLoading } = useTopLoadingBar();
+   
+   // Show loading
+   showLoading();
+   
+   // Hide loading
+   hideLoading();
+  `);
+  
+  return true;
 }
 
 /**
@@ -247,8 +367,13 @@ async function handleAdd(name, options = {}) {
   const kebabName = toKebabCase(name);
   const overwrite = options.overwrite || false;
   
-  // Check if it's a component
-  const componentPath = path.join(templatesDir, `${kebabName}.tsx`);
+  // Special handling for top-loading-bar
+  if (kebabName === 'top-loading-bar' || kebabName === 'toploadingbar') {
+    return await addTopLoadingBar({ logger, config, overwrite });
+  }
+  
+  // Check if it's a component (look in components/ui/)
+  const componentPath = path.join(templatesDir, 'components', 'ui', `${kebabName}.tsx`);
   if (fs.existsSync(componentPath)) {
     return await addComponent(name, { logger, config, overwrite });
   }
@@ -265,6 +390,17 @@ async function handleAdd(name, options = {}) {
     return await addConstant(name, { logger, config, overwrite });
   }
 
+  // Check if it's a context (try both kebab-case and PascalCase)
+  const contextPathKebab = path.join(templatesDir, 'context', `${kebabName}.tsx`);
+  const contextPathPascal = path.join(templatesDir, 'context', `${toPascalCase(kebabName)}.tsx`);
+  if (fs.existsSync(contextPathKebab)) {
+    return await addContext(name, { logger, config, overwrite });
+  } else if (fs.existsSync(contextPathPascal)) {
+    // Use the actual file name
+    const actualName = path.basename(contextPathPascal, '.tsx');
+    return await addContext(actualName, { logger, config, overwrite });
+  }
+
   // Not found
   throw new TemplateNotFoundError(name);
 }
@@ -274,5 +410,7 @@ module.exports = {
   addComponent,
   addHelper,
   addConstant,
+  addContext,
+  addTopLoadingBar,
 };
 

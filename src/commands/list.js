@@ -21,11 +21,13 @@ function handleList(options = {}) {
       components: [],
       helpers: [],
       constants: [],
+      contexts: [],
     };
 
-    // List components
-    if (fs.existsSync(templatesDir)) {
-      items.components = listTemplates(templatesDir);
+    // List components (from components/ui/)
+    const componentsDir = path.join(templatesDir, 'components', 'ui');
+    if (fs.existsSync(componentsDir)) {
+      items.components = listTemplates(componentsDir);
     }
 
     // List helpers
@@ -40,7 +42,13 @@ function handleList(options = {}) {
       items.constants = listTemplates(constantsDir);
     }
 
-    if (items.components.length === 0 && items.helpers.length === 0 && items.constants.length === 0) {
+    // List contexts
+    const contextsDir = path.join(templatesDir, 'context');
+    if (fs.existsSync(contextsDir)) {
+      items.contexts = listTemplates(contextsDir);
+    }
+
+    if (items.components.length === 0 && items.helpers.length === 0 && items.constants.length === 0 && items.contexts.length === 0) {
       logger.warning('No items available.');
       return;
     }
@@ -66,6 +74,14 @@ function handleList(options = {}) {
     if (items.constants.length > 0) {
       console.log(chalk.blue('Available constants:\n'));
       items.constants.forEach(item => {
+        logger.gray(`  - ${item}`);
+      });
+      console.log();
+    }
+
+    if (items.contexts.length > 0) {
+      console.log(chalk.blue('Available contexts:\n'));
+      items.contexts.forEach(item => {
         logger.gray(`  - ${item}`);
       });
     }
