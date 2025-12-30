@@ -3,9 +3,26 @@ const fs = require('fs-extra');
 const { toKebabCase, toPascalCase, getPackageDir } = require('../utils/pathUtils');
 const { TemplateNotFoundError } = require('../utils/errors');
 const { readTemplate, writeFile, listTemplates } = require('../core/templateProcessor');
-const { detectDependencies } = require('../core/dependencyDetector');
+const { detectDependencies, detectRelatedContext, detectRelatedComponent } = require('../core/dependencyDetector');
 const Logger = require('../utils/logger');
 const Config = require('../utils/config');
+const { promptOverwrite } = require('../utils/prompt');
+
+/**
+ * Helper to create a file exists handler with prompt
+ */
+function createFileExistsHandler(options) {
+  return async (filePath) => {
+    if (options.overwrite) {
+      return true; // Already confirmed via --overwrite flag
+    }
+    // Check if we're in interactive mode (not silent and TTY)
+    if (!options.silent && process.stdin.isTTY) {
+      return await promptOverwrite(filePath);
+    }
+    return false; // Non-interactive, don't overwrite
+  };
+}
 
 /**
  * Add a helper file
@@ -25,11 +42,13 @@ async function addHelper(helperName, options = {}) {
     logger.debug(`Looking for template: ${templatePath}`);
     
     const content = await readTemplate(templatePath);
+    const handleFileExists = createFileExistsHandler(options);
     const validatedPath = await writeFile(
       targetPath,
       content,
       projectRoot,
-      options.overwrite || false
+      options.overwrite || false,
+      handleFileExists
     );
 
     if (!options.silent) {
@@ -91,11 +110,13 @@ async function addConstant(constantName, options = {}) {
       }
     }
 
+    const handleFileExists = createFileExistsHandler(options);
     const validatedPath = await writeFile(
       targetPath,
       content,
       projectRoot,
-      options.overwrite || false
+      options.overwrite || false,
+      handleFileExists
     );
 
     if (!options.silent) {
@@ -161,6 +182,15 @@ async function addComponent(componentName, options = {}) {
       }
     }
 
+    // Check for related context
+    const relatedContext = detectRelatedContext(kebabName, templatesDir);
+    if (relatedContext) {
+      const contextPath = path.join(projectRoot, 'context', `${relatedContext}.tsx`);
+      if (!fs.existsSync(contextPath)) {
+        dependenciesToAdd.push(`${relatedContext} context`);
+      }
+    }
+
     // Show summary of what will be added
     if (dependenciesToAdd.length > 0) {
       logger.info(`\nDetected dependencies: ${dependenciesToAdd.join(', ')}`);
@@ -192,11 +222,26 @@ async function addComponent(componentName, options = {}) {
       }
     }
 
+    // Add related context if needed
+    if (relatedContext) {
+      const contextPath = path.join(projectRoot, 'context', `${relatedContext}.tsx`);
+      if (!fs.existsSync(contextPath)) {
+        await addContext(relatedContext, {
+          logger,
+          config,
+          silent: false,
+          overwrite: false,
+        });
+      }
+    }
+
+    const handleFileExists = createFileExistsHandler(options);
     const validatedPath = await writeFile(
       targetPath,
       content,
       projectRoot,
-      options.overwrite || false
+      options.overwrite || false,
+      handleFileExists
     );
 
     logger.success(`Added ${componentName} component to ${path.relative(projectRoot, validatedPath)}`);
@@ -240,17 +285,53 @@ async function addContext(contextName, options = {}) {
   const kebabName = toKebabCase(contextName);
   const templatePath = path.join(templatesDir, 'context', `${kebabName}.tsx`);
   const contextDir = path.join(projectRoot, 'context');
-  const targetPath = path.join(contextDir, `${toPascalCase(kebabName)}.tsx`);
+  const targetPath = path.join(contextDir, `${kebabName}.tsx`);
 
   try {
     logger.debug(`Looking for template: ${templatePath}`);
     
     const content = await readTemplate(templatePath);
+    
+    // Detect dependencies including related component
+    const dependencies = detectDependencies(content);
+    
+    // Check for related component
+    const relatedComponent = detectRelatedComponent(kebabName, templatesDir);
+    const dependenciesToAdd = [];
+    
+    if (relatedComponent) {
+      const componentPath = path.join(config.getComponentsDir(), `${relatedComponent}.tsx`);
+      if (!fs.existsSync(componentPath)) {
+        dependenciesToAdd.push(`${relatedComponent} component`);
+      }
+    }
+
+    // Show summary of what will be added
+    if (dependenciesToAdd.length > 0) {
+      logger.info(`\nDetected dependencies: ${dependenciesToAdd.join(', ')}`);
+      logger.debug('Adding required dependencies...\n');
+    }
+
+    // Add related component if needed
+    if (relatedComponent) {
+      const componentPath = path.join(config.getComponentsDir(), `${relatedComponent}.tsx`);
+      if (!fs.existsSync(componentPath)) {
+        await addComponent(relatedComponent, {
+          logger,
+          config,
+          silent: false,
+          overwrite: false,
+        });
+      }
+    }
+
+    const handleFileExists = createFileExistsHandler(options);
     const validatedPath = await writeFile(
       targetPath,
       content,
       projectRoot,
-      options.overwrite || false
+      options.overwrite || false,
+      handleFileExists
     );
 
     if (!options.silent) {
@@ -277,6 +358,7 @@ async function addTopLoadingBar(options = {}) {
   const packageDir = getPackageDir();
   const templatesDir = path.join(packageDir, 'templates');
   const overwrite = options.overwrite || false;
+  const handleFileExists = createFileExistsHandler(options);
   
   logger.info('Adding Top Loading Bar (context + component)...\n');
   
@@ -291,7 +373,8 @@ async function addTopLoadingBar(options = {}) {
       targetComponentPath,
       content,
       projectRoot,
-      overwrite
+      overwrite,
+      handleFileExists
     );
     logger.success(`Added loading-bar component to ${path.relative(projectRoot, validatedPath)}`);
   } else {
@@ -309,7 +392,8 @@ async function addTopLoadingBar(options = {}) {
       targetContextPath,
       content,
       projectRoot,
-      overwrite
+      overwrite,
+      handleFileExists
     );
     logger.success(`Added top-loading-bar-context to ${path.relative(projectRoot, validatedPath)}`);
   } else {

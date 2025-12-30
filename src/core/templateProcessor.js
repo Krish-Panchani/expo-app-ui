@@ -30,16 +30,26 @@ async function readTemplate(templatePath) {
  * @param {string} content - File content
  * @param {string} baseDir - Base directory for validation
  * @param {boolean} overwrite - Whether to overwrite existing file
- * @throws {FileExistsError} If file exists and overwrite is false
+ * @param {Function} onExists - Optional callback when file exists (returns Promise<boolean>)
+ * @throws {FileExistsError} If file exists and overwrite is false and onExists is not provided
  * @throws {CLIError} If path validation fails
  */
-async function writeFile(targetPath, content, baseDir, overwrite = false) {
+async function writeFile(targetPath, content, baseDir, overwrite = false, onExists = null) {
   // Validate path
   const validatedPath = validatePath(targetPath, baseDir);
   
   // Check if file exists
   if (fs.existsSync(validatedPath) && !overwrite) {
-    throw new FileExistsError(validatedPath);
+    // If callback is provided, use it to ask user
+    if (onExists && typeof onExists === 'function') {
+      const shouldOverwrite = await onExists(validatedPath);
+      if (!shouldOverwrite) {
+        throw new FileExistsError(validatedPath);
+      }
+      // User confirmed, proceed with overwrite
+    } else {
+      throw new FileExistsError(validatedPath);
+    }
   }
 
   // Ensure directory exists

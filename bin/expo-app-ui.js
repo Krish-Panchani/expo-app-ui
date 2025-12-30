@@ -45,8 +45,9 @@ program
         logger.error(`"${name}" not found.`);
         logger.info('Run "npx expo-app-ui list" to see available items.');
       } else if (error instanceof FileExistsError) {
-        logger.error(`File already exists: ${error.filePath}`);
-        logger.info('Use --overwrite to replace it.');
+        // User was prompted and chose not to overwrite, or non-interactive mode
+        logger.warning(`File already exists: ${error.filePath}`);
+        logger.info('Use --overwrite to replace it, or run the command again and choose "y" when prompted.');
       } else if (error instanceof InvalidInputError) {
         logger.error(error.message);
       } else if (error instanceof CLIError) {
