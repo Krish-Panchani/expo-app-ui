@@ -1,9 +1,9 @@
 # Project Structure
 
 ```
-expo-ui/
+expo-app-ui/
 ├── bin/
-│   └── expo-ui.js          # CLI script (executable)
+│   └── expo-app-ui.js          # CLI script (executable)
 ├── templates/
 │   └── custom-text.tsx     # Component template
 ├── package.json            # Package configuration with bin entry
@@ -13,9 +13,9 @@ expo-ui/
 
 ## How It Works
 
-1. **CLI Command**: `npx expo-ai add <component-name>`
-   - The `expo-ai` command is defined in `package.json` bin field
-   - Points to `bin/expo-ui.js`
+1. **CLI Command**: `npx expo-app-ui add <component-name>`
+   - The `expo-app-ui` command is defined in `package.json` bin field
+   - Points to `bin/expo-app-ui.js`
 
 2. **Component Templates**: 
    - Templates are stored in `templates/` directory
@@ -24,7 +24,7 @@ expo-ui/
 
 3. **Component Naming**:
    - Template file: `custom-text.tsx` (kebab-case)
-   - CLI command: `npx expo-ai add custom-text`
+   - CLI command: `npx expo-app-ui add custom-text`
    - Output file: `components/ui/CustomText.tsx` (PascalCase)
 
 ## Adding New Components
@@ -42,13 +42,13 @@ To test the CLI locally before publishing:
 npm link
 
 # In your Expo project
-npx expo-ai add custom-text
+npx expo-app-ui add custom-text
 ```
 
 Or use directly:
 
 ```bash
-# From the expo-ui directory
-node bin/expo-ui.js add custom-text
+# From the expo-app-ui directory
+node bin/expo-app-ui.js add custom-text
 ```
 
