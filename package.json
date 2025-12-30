@@ -4,7 +4,7 @@
   "description": "A UI component library for Expo React Native",
   "main": "index.js",
   "bin": {
-    "expo-ai": "./bin/expo-ui.js"
+    "expo-ai": "bin/expo-ui.js"
   },
   "files": [
     "bin",
@@ -41,4 +41,3 @@
     "fs-extra": "^11.2.0"
   }
 }
-
