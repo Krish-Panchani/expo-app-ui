@@ -3,4 +3,11 @@ const withNextra = require('nextra').default({
   themeConfig: './theme.config.tsx',
 })
 
-module.exports = withNextra()
+const nextConfig = {
+  // Domain: https://expo-apps-ui.vercel.app
+  env: {
+    NEXT_PUBLIC_SITE_URL: 'https://expo-apps-ui.vercel.app',
+  },
+}
+
+module.exports = withNextra(nextConfig)
