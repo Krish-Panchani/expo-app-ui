@@ -1,7 +1,7 @@
 {
   "name": "expo-app-ui",
   "version": "1.0.2",
-  "description": "A UI component library for Expo React Native",
+  "description": "A UI component library for Expo React Native. Copy components directly into your project and customize them to your needs. Documentation: https://expo-apps-ui.vercel.app",
   "main": "index.js",
   "bin": {
     "expo-app-ui": "bin/expo-app-ui.js"
@@ -23,9 +23,15 @@
     "ui",
     "components",
     "cli",
-    "component-library"
+    "component-library",
+    "expo-ui",
+    "react-native-components",
+    "mobile-ui",
+    "expo-components",
+    "ui-library",
+    "react-native-ui"
   ],
-  "author": "",
+  "author": "Krish Panchani",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -34,7 +40,7 @@
   "bugs": {
     "url": "https://github.com/Krish-Panchani/expo-app-ui/issues"
   },
-    "homepage": "https://github.com/Krish-Panchani/expo-app-ui#readme",
+  "homepage": "https://expo-apps-ui.vercel.app",
   "engines": {
     "node": ">=14.0.0"
   },
