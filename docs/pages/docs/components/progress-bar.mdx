@@ -1,0 +1,56 @@
+# Progress Bar
+
+A customizable progress bar component with variants and labels
+
+## Installation
+
+```bash
+npx expo-app-ui add progress-bar
+```
+
+:::note
+This will automatically add required dependencies: theme.
+:::
+
+## Usage
+
+```tsx
+import ProgressBar from "@/components/ui/progress-bar";
+
+<ProgressBar progress={0.75} width={300} label="75% Complete" />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| progress | number | - | Progress value (0-1) |
+| width | number | 300 | Progress bar width |
+| height | number | 20 | Progress bar height |
+| color | string | colors.forest_green | Progress bar color |
+| label | string | "" | Label text |
+| variant | 'normal' \| 'count' | 'normal' | Progress bar variant |
+| count | number | 1 | Total count (for count variant) |
+| currentCount | number | 0 | Current count (for count variant) |
+
+## Examples
+
+### Normal Variant
+
+```tsx
+<ProgressBar progress={0.75} width={300} label="75% Complete" />
+```
+
+### Count Variant
+
+```tsx
+<ProgressBar variant="count" count={10} currentCount={7} />
+```
+
+## Features
+
+- Normal and count variants
+- Customizable colors and sizes
+- Label support
+- Smooth animations
+

@@ -1,0 +1,60 @@
+# normalizeSize
+
+A utility function to normalize font sizes based on device font scale
+
+## Installation
+
+```bash
+npx expo-app-ui add normalizeSize
+```
+
+## Usage
+
+```tsx
+import { normalizeSize } from "@/helper/normalizeSize";
+```
+
+## Function Signature
+
+```tsx
+normalizeSize(size: number): number
+```
+
+### Parameters
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| size | number | The base font size to normalize |
+
+### Returns
+
+| Type | Description |
+|------|-------------|
+| number | The normalized font size |
+
+## Examples
+
+### Basic Usage
+
+```tsx
+const fontSize = normalizeSize(16);
+// On normal devices: returns 16
+// On devices with large text: returns ~13.6
+```
+
+### In StyleSheet
+
+```tsx
+const styles = StyleSheet.create({
+  text: {
+    fontSize: normalizeSize(18),
+  },
+});
+```
+
+## Features
+
+- Automatic font scale detection
+- Adjusts for accessibility settings
+- Prevents text from becoming too large
+

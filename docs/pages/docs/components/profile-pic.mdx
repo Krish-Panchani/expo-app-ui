@@ -1,0 +1,54 @@
+# Profile Pic
+
+A profile picture component with fallback, loading state, and customizable styling
+
+## Installation
+
+```bash
+npx expo-app-ui add profile-pic
+```
+
+:::note
+This will automatically add required dependencies: theme.
+:::
+
+## Usage
+
+```tsx
+import ProfilePic from "@/components/ui/profile-pic";
+
+<ProfilePic source="https://example.com/avatar.jpg" username="John Doe" />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| source | string | - | Image URL |
+| username | string | Required | Username for fallback initials |
+| width | number | 50 | Image width |
+| height | number | 50 | Image height |
+| borderRadius | number | 50 | Border radius (50 = circle) |
+| isLoading | boolean | false | Show loading indicator |
+
+## Examples
+
+### With Image
+
+```tsx
+<ProfilePic source="https://example.com/avatar.jpg" username="John Doe" />
+```
+
+### Fallback to Initials
+
+```tsx
+<ProfilePic username="Jane Smith" width={80} height={80} />
+```
+
+## Features
+
+- Automatic fallback to initials
+- Loading state indicator
+- Uses expo-image for optimization
+- Blurhash placeholder support
+

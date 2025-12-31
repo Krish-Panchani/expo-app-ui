@@ -1,0 +1,54 @@
+# Marquee
+
+A smooth scrolling marquee component for displaying continuous text or content
+
+## Installation
+
+```bash
+npx expo-app-ui add marquee
+```
+
+## Usage
+
+```tsx
+import Marquee from "@/components/ui/marquee";
+
+<Marquee speed={50}>
+  <Text>Scrolling text content</Text>
+</Marquee>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | ReactNode | Required | Content to scroll |
+| speed | number | 50 | Scroll speed (pixels per frame) |
+| reverse | boolean | false | Reverse scroll direction |
+| style | StyleProp<ViewStyle> | - | Container styles |
+
+## Examples
+
+### Basic Marquee
+
+```tsx
+<Marquee speed={50}>
+  <Text>Scrolling text content</Text>
+</Marquee>
+```
+
+### Reverse Direction
+
+```tsx
+<Marquee speed={50} reverse={true}>
+  <Text>Scrolling from right to left</Text>
+</Marquee>
+```
+
+## Features
+
+- Smooth continuous scrolling
+- Configurable scroll speed
+- Bidirectional scrolling
+- 60fps performance with reanimated
+

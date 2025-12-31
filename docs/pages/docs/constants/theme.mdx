@@ -1,0 +1,80 @@
+# Theme Constants
+
+Theme constants including colors, fonts, and sizes for consistent styling
+
+## Installation
+
+```bash
+npx expo-app-ui add theme
+```
+
+:::note
+This will automatically add required dependencies: normalizeSize.
+:::
+
+## Usage
+
+```tsx
+import { colors, fonts, size } from "@/constants/theme";
+```
+
+## Exports
+
+### Colors
+
+| Color | Value |
+|-------|-------|
+| primary | #007AFF |
+| secondary | #5856D6 |
+| success | #34C759 |
+| warning | #FF9500 |
+| error | #FF3B30 |
+| white | #FFFFFF |
+| black | #000000 |
+| gray | #8E8E93 |
+| lightGray | #F2F2F7 |
+| darkGray | #1C1C1E |
+| forest_green | #228B22 |
+
+### Sizes
+
+| Size | Value |
+|------|-------|
+| xs | 12 |
+| sm | 14 |
+| base | 16 |
+| md | 18 |
+| lg | 20 |
+| lg2 | 24 |
+| xl | 26 |
+| xl2 | 28 |
+| xxl | 32 |
+| txl | 40 |
+
+## Examples
+
+### Using Colors
+
+```tsx
+<View style={{ backgroundColor: colors.primary }} />
+```
+
+### Using Fonts
+
+```tsx
+<Text style={{ fontFamily: fonts.inter }} />
+```
+
+### Using Sizes
+
+```tsx
+<Text style={{ fontSize: size.md }} />
+```
+
+## Features
+
+- Comprehensive color palette
+- Normalized font sizes
+- Easy to customize
+- Consistent design system
+

@@ -1,0 +1,67 @@
+# Button
+
+A flexible button component with variants and icon support
+
+## Installation
+
+```bash
+npx expo-app-ui add button
+```
+
+:::note
+This will automatically add required dependencies: theme, normalizeSize.
+:::
+
+## Usage
+
+```tsx
+import Button from "@/components/ui/button";
+
+<Button title="Click Me" onPress={() => console.log('Pressed')} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| title | string | Required | Button text |
+| variant | 'primary' \| 'outlined' \| 'outlinedBottom' \| 'normal' \| 'custom' | 'primary' | Button variant |
+| onPress | () => void | Required | Press handler |
+| disabled | boolean | false | Disabled state |
+| loading | boolean | false | Loading state |
+| IconLeft | React.ComponentType | undefined | Left icon component |
+| IconRight | React.ComponentType | undefined | Right icon component |
+| IconCenter | React.ComponentType | undefined | Center icon component |
+| fontSize | number | undefined | Custom font size |
+| fontWeight | string | undefined | Custom font weight |
+| textColor | string | undefined | Custom text color |
+| bgColor | string | undefined | Custom background color |
+
+## Examples
+
+### Basic Button
+
+```tsx
+<Button title="Click Me" onPress={() => console.log('Pressed')} />
+```
+
+### Variants
+
+```tsx
+<Button variant="primary" title="Primary" />
+<Button variant="outlined" title="Outlined" />
+```
+
+### With Icons
+
+```tsx
+<Button title="Like" IconLeft={HeartIcon} />
+```
+
+## Features
+
+- Multiple variants
+- Icon support (left, right, center)
+- Loading and disabled states
+- Fully customizable styling
+

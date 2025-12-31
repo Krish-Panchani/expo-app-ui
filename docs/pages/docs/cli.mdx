@@ -1,0 +1,98 @@
+# CLI Commands
+
+Complete reference for all Expo App UI CLI commands.
+
+## Commands
+
+### `add`
+
+Add a component, helper, constant, or context to your project.
+
+**Usage:**
+
+```bash
+npx expo-app-ui add <name>
+npx expo-app-ui add <name> --overwrite
+```
+
+**Options:**
+
+- `--overwrite` - Overwrite existing files without prompting
+
+**Examples:**
+
+```bash
+# Add a component
+npx expo-app-ui add button
+
+# Add a helper
+npx expo-app-ui add normalizeSize
+
+# Add a constant
+npx expo-app-ui add theme
+
+# Add top loading bar (component + context)
+npx expo-app-ui add top-loading-bar
+```
+
+:::tip
+The CLI automatically detects and adds required dependencies (helpers, constants) when you add a component.
+:::
+
+### `list`
+
+List all available components, helpers, constants, and contexts.
+
+**Usage:**
+
+```bash
+npx expo-app-ui list
+```
+
+**Output:**
+
+```
+Available components:
+  - box-view
+  - button
+  - custom-modal
+  - custom-text
+  - loading-bar
+  - marquee
+  - otp-input
+  - profile-pic
+  - progress-bar
+
+Available helpers:
+  - normalizeSize
+
+Available constants:
+  - theme
+
+Available contexts:
+  - top-loading-bar-context
+```
+
+## Global Options
+
+- `-v, --verbose` - Enable verbose output
+- `-s, --silent` - Enable silent mode (no output)
+
+## File Overwrite Behavior
+
+When a file already exists, the CLI will:
+
+- **Interactive mode (TTY):** Prompt you to confirm overwrite
+- **With --overwrite flag:** Automatically overwrite without prompting
+- **Non-interactive mode:** Show an error and exit
+
+## Auto-Dependency Detection
+
+The CLI automatically detects when a component requires:
+
+- `normalizeSize` helper
+- `theme` constants
+- Related components or contexts
+
+These dependencies are automatically added to your project if they don't already exist.
+

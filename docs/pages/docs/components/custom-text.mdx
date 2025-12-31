@@ -1,0 +1,62 @@
+# Custom Text
+
+A customizable Text component with font, color, and spacing props
+
+## Installation
+
+```bash
+npx expo-app-ui add custom-text
+```
+
+:::note
+This will automatically add required dependencies: theme.
+:::
+
+## Usage
+
+```tsx
+import CustomText from "@/components/ui/custom-text";
+
+<CustomText>Default text</CustomText>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| variant | 'h1' \| 'h2' \| 'h3' \| 'h4' \| 'body' \| 'caption' | 'body' | Text variant |
+| color | string | 'primary' | Text color from theme |
+| size | 'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' | 'md' | Text size |
+| weight | 'light' \| 'regular' \| 'medium' \| 'semibold' \| 'bold' | 'regular' | Font weight |
+| numberOfLines | number | undefined | Maximum number of lines |
+| ellipsizeMode | 'head' \| 'middle' \| 'tail' \| 'clip' | 'tail' | How to truncate text |
+
+## Examples
+
+### Basic Usage
+
+```tsx
+<CustomText>Default text</CustomText>
+```
+
+### Headings
+
+```tsx
+<CustomText variant="h1">Heading 1</CustomText>
+<CustomText variant="h2">Heading 2</CustomText>
+```
+
+### Colors
+
+```tsx
+<CustomText color="primary">Primary text</CustomText>
+<CustomText color="secondary">Secondary text</CustomText>
+```
+
+## Features
+
+- Multiple text variants
+- Customizable colors
+- Font weight options
+- Text truncation support
+

@@ -1,0 +1,62 @@
+# Box View
+
+A flexible layout component with comprehensive flexbox props
+
+## Installation
+
+```bash
+npx expo-app-ui add box-view
+```
+
+## Usage
+
+```tsx
+import BoxView from "@/components/ui/box-view";
+
+<BoxView flexDirection="row" gap={10}>
+  <Text>Item 1</Text>
+  <Text>Item 2</Text>
+</BoxView>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| flexDirection | 'row' \| 'column' | - | Flex direction |
+| justifyContent | 'flex-start' \| 'flex-end' \| 'center' \| 'space-between' \| 'space-around' \| 'space-evenly' | - | Justify content alignment |
+| alignItems | 'flex-start' \| 'flex-end' \| 'center' \| 'stretch' \| 'baseline' | - | Align items |
+| gap | number | - | Gap between children |
+| padding | number | - | Uniform padding |
+| paddingX | number | - | Horizontal padding |
+| paddingY | number | - | Vertical padding |
+| margin | number | - | Uniform margin |
+| width | string \| number | - | Width |
+| height | string \| number | - | Height |
+
+## Examples
+
+### Basic Layout
+
+```tsx
+<BoxView flexDirection="row" gap={10}>
+  <Text>Item 1</Text>
+  <Text>Item 2</Text>
+</BoxView>
+```
+
+### Centered Content
+
+```tsx
+<BoxView justifyContent="center" alignItems="center" height="100%">
+  <Text>Centered</Text>
+</BoxView>
+```
+
+## Features
+
+- Comprehensive flexbox props
+- Easy spacing with gap, padding, margin
+- Direction-specific spacing props
+- Customizable dimensions
+

@@ -1,0 +1,48 @@
+# Custom Modal
+
+An animated modal component with backdrop and smooth animations
+
+## Installation
+
+```bash
+npx expo-app-ui add custom-modal
+```
+
+## Usage
+
+```tsx
+import CustomModal from "@/components/ui/custom-modal";
+
+<CustomModal visible={visible} onClose={() => setVisible(false)}>
+  <Text>Modal Content</Text>
+</CustomModal>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| visible | boolean | Required | Controls modal visibility |
+| onClose | () => void | Required | Callback when modal should close |
+| preventBackgroundTouchEvent | boolean | false | Prevent closing on backdrop touch |
+| children | ReactNode | Required | Modal content |
+| style | StyleProp<ViewStyle> | - | Root container styles |
+| modalStyle | StyleProp<ViewStyle> | - | Modal content box styles |
+
+## Examples
+
+### Basic Modal
+
+```tsx
+<CustomModal visible={visible} onClose={() => setVisible(false)}>
+  <Text>Modal Content</Text>
+</CustomModal>
+```
+
+## Features
+
+- Smooth fade animations
+- Backdrop with opacity
+- Configurable backdrop behavior
+- Customizable styling
+

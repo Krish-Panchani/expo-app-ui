@@ -1,0 +1,82 @@
+# Getting Started
+
+## Installation
+
+### Using npx (Recommended)
+
+No installation required. Use directly with npx:
+
+```bash
+npx expo-app-ui <command>
+```
+
+### Global Installation
+
+Install globally for easier access:
+
+```bash
+npm install -g expo-app-ui
+expo-app-ui <command>
+```
+
+## Quick Start
+
+Add a component to your project:
+
+```bash
+npx expo-app-ui add custom-text
+```
+
+## Path Aliases
+
+Make sure your project has path aliases configured.
+
+### tsconfig.json
+
+```json
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./*"]
+    }
+  }
+}
+```
+
+### babel.config.js
+
+```js
+module.exports = function(api) {
+  api.cache(true);
+  return {
+    presets: ['babel-preset-expo'],
+    plugins: [
+      [
+        'module-resolver',
+        {
+          root: ['./'],
+          alias: {
+            '@': './',
+          },
+        },
+      ],
+    ],
+  };
+};
+```
+
+## Auto-Dependency Detection
+
+The CLI automatically detects when a component requires:
+
+- `normalizeSize` helper
+- `theme` constants
+- Related components or contexts
+
+These dependencies are automatically added to your project if they don't already exist.
+
+## Next Steps
+
+- [Browse Components →](/docs/components)
+- [Learn CLI Commands →](/docs/cli)
+

@@ -1,0 +1,778 @@
+{
+  "components": [
+    {
+      "slug": "custom-text",
+      "name": "Custom Text",
+      "description": "A customizable Text component with font, color, and spacing props",
+      "category": "components",
+      "installation": "npx expo-app-ui add custom-text",
+      "import": "import CustomText from \"@/components/ui/custom-text\";",
+      "dependencies": ["theme"],
+      "props": [
+        {
+          "name": "variant",
+          "type": "'h1' | 'h2' | 'h3' | 'h4' | 'body' | 'caption'",
+          "default": "'body'",
+          "description": "Text variant"
+        },
+        {
+          "name": "color",
+          "type": "string",
+          "default": "'primary'",
+          "description": "Text color from theme"
+        },
+        {
+          "name": "size",
+          "type": "'xs' | 'sm' | 'md' | 'lg' | 'xl'",
+          "default": "'md'",
+          "description": "Text size"
+        },
+        {
+          "name": "weight",
+          "type": "'light' | 'regular' | 'medium' | 'semibold' | 'bold'",
+          "default": "'regular'",
+          "description": "Font weight"
+        },
+        {
+          "name": "numberOfLines",
+          "type": "number",
+          "default": "undefined",
+          "description": "Maximum number of lines"
+        },
+        {
+          "name": "ellipsizeMode",
+          "type": "'head' | 'middle' | 'tail' | 'clip'",
+          "default": "'tail'",
+          "description": "How to truncate text"
+        }
+      ],
+      "examples": [
+        {
+          "title": "Basic Usage",
+          "code": "<CustomText>Default text</CustomText>"
+        },
+        {
+          "title": "Headings",
+          "code": "<CustomText variant=\"h1\">Heading 1</CustomText>\n<CustomText variant=\"h2\">Heading 2</CustomText>"
+        },
+        {
+          "title": "Colors",
+          "code": "<CustomText color=\"primary\">Primary text</CustomText>\n<CustomText color=\"secondary\">Secondary text</CustomText>"
+        }
+      ],
+      "features": [
+        "Multiple text variants",
+        "Customizable colors",
+        "Font weight options",
+        "Text truncation support"
+      ]
+    },
+    {
+      "slug": "button",
+      "name": "Button",
+      "description": "A flexible button component with variants and icon support",
+      "category": "components",
+      "installation": "npx expo-app-ui add button",
+      "import": "import Button from \"@/components/ui/button\";",
+      "dependencies": ["theme", "normalizeSize"],
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "default": "Required",
+          "description": "Button text"
+        },
+        {
+          "name": "variant",
+          "type": "'primary' | 'outlined' | 'outlinedBottom' | 'normal' | 'custom'",
+          "default": "'primary'",
+          "description": "Button variant"
+        },
+        {
+          "name": "onPress",
+          "type": "() => void",
+          "default": "Required",
+          "description": "Press handler"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false",
+          "description": "Disabled state"
+        },
+        {
+          "name": "loading",
+          "type": "boolean",
+          "default": "false",
+          "description": "Loading state"
+        },
+        {
+          "name": "IconLeft",
+          "type": "React.ComponentType",
+          "default": "undefined",
+          "description": "Left icon component"
+        },
+        {
+          "name": "IconRight",
+          "type": "React.ComponentType",
+          "default": "undefined",
+          "description": "Right icon component"
+        },
+        {
+          "name": "IconCenter",
+          "type": "React.ComponentType",
+          "default": "undefined",
+          "description": "Center icon component"
+        },
+        {
+          "name": "fontSize",
+          "type": "number",
+          "default": "undefined",
+          "description": "Custom font size"
+        },
+        {
+          "name": "fontWeight",
+          "type": "string",
+          "default": "undefined",
+          "description": "Custom font weight"
+        },
+        {
+          "name": "textColor",
+          "type": "string",
+          "default": "undefined",
+          "description": "Custom text color"
+        },
+        {
+          "name": "bgColor",
+          "type": "string",
+          "default": "undefined",
+          "description": "Custom background color"
+        }
+      ],
+      "examples": [
+        {
+          "title": "Basic Button",
+          "code": "<Button title=\"Click Me\" onPress={() => console.log('Pressed')} />"
+        },
+        {
+          "title": "Variants",
+          "code": "<Button variant=\"primary\" title=\"Primary\" />\n<Button variant=\"outlined\" title=\"Outlined\" />"
+        },
+        {
+          "title": "With Icons",
+          "code": "<Button title=\"Like\" IconLeft={HeartIcon} />"
+        }
+      ],
+      "features": [
+        "Multiple variants",
+        "Icon support (left, right, center)",
+        "Loading and disabled states",
+        "Fully customizable styling"
+      ]
+    },
+    {
+      "slug": "box-view",
+      "name": "Box View",
+      "description": "A flexible layout component with comprehensive flexbox props",
+      "category": "components",
+      "installation": "npx expo-app-ui add box-view",
+      "import": "import BoxView from \"@/components/ui/box-view\";",
+      "dependencies": [],
+      "props": [
+        {
+          "name": "flexDirection",
+          "type": "'row' | 'column'",
+          "default": "-",
+          "description": "Flex direction"
+        },
+        {
+          "name": "justifyContent",
+          "type": "'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'space-evenly'",
+          "default": "-",
+          "description": "Justify content alignment"
+        },
+        {
+          "name": "alignItems",
+          "type": "'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline'",
+          "default": "-",
+          "description": "Align items"
+        },
+        {
+          "name": "gap",
+          "type": "number",
+          "default": "-",
+          "description": "Gap between children"
+        },
+        {
+          "name": "padding",
+          "type": "number",
+          "default": "-",
+          "description": "Uniform padding"
+        },
+        {
+          "name": "paddingX",
+          "type": "number",
+          "default": "-",
+          "description": "Horizontal padding"
+        },
+        {
+          "name": "paddingY",
+          "type": "number",
+          "default": "-",
+          "description": "Vertical padding"
+        },
+        {
+          "name": "margin",
+          "type": "number",
+          "default": "-",
+          "description": "Uniform margin"
+        },
+        {
+          "name": "width",
+          "type": "string | number",
+          "default": "-",
+          "description": "Width"
+        },
+        {
+          "name": "height",
+          "type": "string | number",
+          "default": "-",
+          "description": "Height"
+        }
+      ],
+      "examples": [
+        {
+          "title": "Basic Layout",
+          "code": "<BoxView flexDirection=\"row\" gap={10}>\n  <Text>Item 1</Text>\n  <Text>Item 2</Text>\n</BoxView>"
+        },
+        {
+          "title": "Centered Content",
+          "code": "<BoxView justifyContent=\"center\" alignItems=\"center\" height=\"100%\">\n  <Text>Centered</Text>\n</BoxView>"
+        }
+      ],
+      "features": [
+        "Comprehensive flexbox props",
+        "Easy spacing with gap, padding, margin",
+        "Direction-specific spacing props",
+        "Customizable dimensions"
+      ]
+    },
+    {
+      "slug": "custom-modal",
+      "name": "Custom Modal",
+      "description": "An animated modal component with backdrop and smooth animations",
+      "category": "components",
+      "installation": "npx expo-app-ui add custom-modal",
+      "import": "import CustomModal from \"@/components/ui/custom-modal\";",
+      "dependencies": [],
+      "props": [
+        {
+          "name": "visible",
+          "type": "boolean",
+          "default": "Required",
+          "description": "Controls modal visibility"
+        },
+        {
+          "name": "onClose",
+          "type": "() => void",
+          "default": "Required",
+          "description": "Callback when modal should close"
+        },
+        {
+          "name": "preventBackgroundTouchEvent",
+          "type": "boolean",
+          "default": "false",
+          "description": "Prevent closing on backdrop touch"
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "default": "Required",
+          "description": "Modal content"
+        },
+        {
+          "name": "style",
+          "type": "StyleProp<ViewStyle>",
+          "default": "-",
+          "description": "Root container styles"
+        },
+        {
+          "name": "modalStyle",
+          "type": "StyleProp<ViewStyle>",
+          "default": "-",
+          "description": "Modal content box styles"
+        }
+      ],
+      "examples": [
+        {
+          "title": "Basic Modal",
+          "code": "<CustomModal visible={visible} onClose={() => setVisible(false)}>\n  <Text>Modal Content</Text>\n</CustomModal>"
+        }
+      ],
+      "features": [
+        "Smooth fade animations",
+        "Backdrop with opacity",
+        "Configurable backdrop behavior",
+        "Customizable styling"
+      ]
+    },
+    {
+      "slug": "profile-pic",
+      "name": "Profile Pic",
+      "description": "A profile picture component with fallback, loading state, and customizable styling",
+      "category": "components",
+      "installation": "npx expo-app-ui add profile-pic",
+      "import": "import ProfilePic from \"@/components/ui/profile-pic\";",
+      "dependencies": ["theme"],
+      "props": [
+        {
+          "name": "source",
+          "type": "string",
+          "default": "-",
+          "description": "Image URL"
+        },
+        {
+          "name": "username",
+          "type": "string",
+          "default": "Required",
+          "description": "Username for fallback initials"
+        },
+        {
+          "name": "width",
+          "type": "number",
+          "default": "50",
+          "description": "Image width"
+        },
+        {
+          "name": "height",
+          "type": "number",
+          "default": "50",
+          "description": "Image height"
+        },
+        {
+          "name": "borderRadius",
+          "type": "number",
+          "default": "50",
+          "description": "Border radius (50 = circle)"
+        },
+        {
+          "name": "isLoading",
+          "type": "boolean",
+          "default": "false",
+          "description": "Show loading indicator"
+        }
+      ],
+      "examples": [
+        {
+          "title": "With Image",
+          "code": "<ProfilePic source=\"https://example.com/avatar.jpg\" username=\"John Doe\" />"
+        },
+        {
+          "title": "Fallback to Initials",
+          "code": "<ProfilePic username=\"Jane Smith\" width={80} height={80} />"
+        }
+      ],
+      "features": [
+        "Automatic fallback to initials",
+        "Loading state indicator",
+        "Uses expo-image for optimization",
+        "Blurhash placeholder support"
+      ]
+    },
+    {
+      "slug": "progress-bar",
+      "name": "Progress Bar",
+      "description": "A customizable progress bar component with variants and labels",
+      "category": "components",
+      "installation": "npx expo-app-ui add progress-bar",
+      "import": "import ProgressBar from \"@/components/ui/progress-bar\";",
+      "dependencies": ["theme"],
+      "props": [
+        {
+          "name": "progress",
+          "type": "number",
+          "default": "-",
+          "description": "Progress value (0-1)"
+        },
+        {
+          "name": "width",
+          "type": "number",
+          "default": "300",
+          "description": "Progress bar width"
+        },
+        {
+          "name": "height",
+          "type": "number",
+          "default": "20",
+          "description": "Progress bar height"
+        },
+        {
+          "name": "color",
+          "type": "string",
+          "default": "colors.forest_green",
+          "description": "Progress bar color"
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": "\"\"",
+          "description": "Label text"
+        },
+        {
+          "name": "variant",
+          "type": "'normal' | 'count'",
+          "default": "'normal'",
+          "description": "Progress bar variant"
+        },
+        {
+          "name": "count",
+          "type": "number",
+          "default": "1",
+          "description": "Total count (for count variant)"
+        },
+        {
+          "name": "currentCount",
+          "type": "number",
+          "default": "0",
+          "description": "Current count (for count variant)"
+        }
+      ],
+      "examples": [
+        {
+          "title": "Normal Variant",
+          "code": "<ProgressBar progress={0.75} width={300} label=\"75% Complete\" />"
+        },
+        {
+          "title": "Count Variant",
+          "code": "<ProgressBar variant=\"count\" count={10} currentCount={7} />"
+        }
+      ],
+      "features": [
+        "Normal and count variants",
+        "Customizable colors and sizes",
+        "Label support",
+        "Smooth animations"
+      ]
+    },
+    {
+      "slug": "marquee",
+      "name": "Marquee",
+      "description": "A smooth scrolling marquee component for displaying continuous text or content",
+      "category": "components",
+      "installation": "npx expo-app-ui add marquee",
+      "import": "import Marquee from \"@/components/ui/marquee\";",
+      "dependencies": [],
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "default": "Required",
+          "description": "Content to scroll"
+        },
+        {
+          "name": "speed",
+          "type": "number",
+          "default": "50",
+          "description": "Scroll speed (pixels per frame)"
+        },
+        {
+          "name": "reverse",
+          "type": "boolean",
+          "default": "false",
+          "description": "Reverse scroll direction"
+        },
+        {
+          "name": "style",
+          "type": "StyleProp<ViewStyle>",
+          "default": "-",
+          "description": "Container styles"
+        }
+      ],
+      "examples": [
+        {
+          "title": "Basic Marquee",
+          "code": "<Marquee speed={50}>\n  <Text>Scrolling text content</Text>\n</Marquee>"
+        },
+        {
+          "title": "Reverse Direction",
+          "code": "<Marquee speed={50} reverse={true}>\n  <Text>Scrolling from right to left</Text>\n</Marquee>"
+        }
+      ],
+      "features": [
+        "Smooth continuous scrolling",
+        "Configurable scroll speed",
+        "Bidirectional scrolling",
+        "60fps performance with reanimated"
+      ]
+    },
+    {
+      "slug": "otp-input",
+      "name": "OTP Input",
+      "description": "A customizable OTP (One-Time Password) input component with validation states",
+      "category": "components",
+      "installation": "npx expo-app-ui add otp-input",
+      "import": "import OTPInput from \"@/components/ui/otp-input\";",
+      "dependencies": [],
+      "props": [
+        {
+          "name": "length",
+          "type": "number",
+          "default": "6",
+          "description": "Number of OTP digits"
+        },
+        {
+          "name": "onChangeText",
+          "type": "(otp: string) => void",
+          "default": "Required",
+          "description": "Callback when OTP changes"
+        },
+        {
+          "name": "onSubmit",
+          "type": "(otp: string) => void",
+          "default": "-",
+          "description": "Callback when OTP is complete"
+        },
+        {
+          "name": "autoFocus",
+          "type": "boolean",
+          "default": "false",
+          "description": "Auto focus first input"
+        },
+        {
+          "name": "isLoading",
+          "type": "boolean",
+          "default": "false",
+          "description": "Show loading state"
+        },
+        {
+          "name": "isDisabled",
+          "type": "boolean",
+          "default": "false",
+          "description": "Disable all inputs"
+        },
+        {
+          "name": "isSuccess",
+          "type": "boolean",
+          "default": "false",
+          "description": "Show success state"
+        },
+        {
+          "name": "isError",
+          "type": "boolean",
+          "default": "false",
+          "description": "Show error state"
+        }
+      ],
+      "examples": [
+        {
+          "title": "Basic OTP Input",
+          "code": "<OTPInput length={6} onChangeText={setOtp} onSubmit={(otp) => verifyOTP(otp)} />"
+        },
+        {
+          "title": "With Validation States",
+          "code": "<OTPInput length={6} onChangeText={setOtp} isLoading={isVerifying} isSuccess={isVerified} />"
+        }
+      ],
+      "features": [
+        "Individual input fields",
+        "Automatic focus management",
+        "Backspace handling",
+        "Validation states (success, error, loading)",
+        "Auto-submit when complete"
+      ]
+    },
+    {
+      "slug": "loading-bar",
+      "name": "Loading Bar",
+      "description": "An animated top loading bar component for showing loading states",
+      "category": "components",
+      "installation": "npx expo-app-ui add loading-bar",
+      "import": "import LoadingBar from \"@/components/ui/loading-bar\";",
+      "dependencies": [],
+      "props": [
+        {
+          "name": "color",
+          "type": "string",
+          "default": "'#007AFF'",
+          "description": "Loading bar color"
+        }
+      ],
+      "examples": [
+        {
+          "title": "Standalone",
+          "code": "<LoadingBar color=\"#007AFF\" />"
+        },
+        {
+          "title": "With Context (Recommended)",
+          "code": "// See top-loading-bar-context documentation"
+        }
+      ],
+      "features": [
+        "Smooth infinite animation",
+        "Customizable color",
+        "Uses react-native-reanimated",
+        "Positioned at top of screen"
+      ],
+      "relatedContext": "top-loading-bar-context"
+    }
+  ],
+  "contexts": [
+    {
+      "slug": "top-loading-bar-context",
+      "name": "Top Loading Bar Context",
+      "description": "A React Context for managing top loading bar state across your application",
+      "category": "contexts",
+      "installation": "npx expo-app-ui add top-loading-bar",
+      "import": "import { LoadingProvider, useTopLoadingBar } from \"@/context/top-loading-bar-context\";",
+      "dependencies": ["loading-bar"],
+      "props": [
+        {
+          "name": "color",
+          "type": "string",
+          "default": "'#007AFF'",
+          "description": "Loading bar color"
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "default": "Required",
+          "description": "App content"
+        }
+      ],
+      "hook": {
+        "name": "useTopLoadingBar",
+        "returns": [
+          {
+            "name": "showLoading",
+            "type": "() => void",
+            "description": "Shows the loading bar"
+          },
+          {
+            "name": "hideLoading",
+            "type": "() => void",
+            "description": "Hides the loading bar"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Setup",
+          "code": "// Wrap your app\n<LoadingProvider color=\"#007AFF\">\n  <App />\n</LoadingProvider>"
+        },
+        {
+          "title": "Usage",
+          "code": "const { showLoading, hideLoading } = useTopLoadingBar();\n\nshowLoading(); // Show loading\nhideLoading(); // Hide loading"
+        }
+      ],
+      "features": [
+        "Global state management",
+        "Easy-to-use hook API",
+        "Customizable color",
+        "Automatic component integration"
+      ],
+      "relatedComponent": "loading-bar"
+    }
+  ],
+  "helpers": [
+    {
+      "slug": "normalizeSize",
+      "name": "normalizeSize",
+      "description": "A utility function to normalize font sizes based on device font scale",
+      "category": "helpers",
+      "installation": "npx expo-app-ui add normalizeSize",
+      "import": "import { normalizeSize } from \"@/helper/normalizeSize\";",
+      "dependencies": [],
+      "function": {
+        "signature": "normalizeSize(size: number): number",
+        "parameters": [
+          {
+            "name": "size",
+            "type": "number",
+            "description": "The base font size to normalize"
+          }
+        ],
+        "returns": {
+          "type": "number",
+          "description": "The normalized font size"
+        }
+      },
+      "examples": [
+        {
+          "title": "Basic Usage",
+          "code": "const fontSize = normalizeSize(16);\n// On normal devices: returns 16\n// On devices with large text: returns ~13.6"
+        },
+        {
+          "title": "In StyleSheet",
+          "code": "const styles = StyleSheet.create({\n  text: {\n    fontSize: normalizeSize(18),\n  },\n});"
+        }
+      ],
+      "features": [
+        "Automatic font scale detection",
+        "Adjusts for accessibility settings",
+        "Prevents text from becoming too large"
+      ]
+    }
+  ],
+  "constants": [
+    {
+      "slug": "theme",
+      "name": "Theme Constants",
+      "description": "Theme constants including colors, fonts, and sizes for consistent styling",
+      "category": "constants",
+      "installation": "npx expo-app-ui add theme",
+      "import": "import { colors, fonts, size } from \"@/constants/theme\";",
+      "dependencies": ["normalizeSize"],
+      "exports": {
+        "colors": {
+          "primary": "#007AFF",
+          "secondary": "#5856D6",
+          "success": "#34C759",
+          "warning": "#FF9500",
+          "error": "#FF3B30",
+          "white": "#FFFFFF",
+          "black": "#000000",
+          "gray": "#8E8E93",
+          "lightGray": "#F2F2F7",
+          "darkGray": "#1C1C1E",
+          "forest_green": "#228B22"
+        },
+        "fonts": {
+          "inter": "System"
+        },
+        "sizes": {
+          "xs": 12,
+          "sm": 14,
+          "base": 16,
+          "md": 18,
+          "lg": 20,
+          "lg2": 24,
+          "xl": 26,
+          "xl2": 28,
+          "xxl": 32,
+          "txl": 40
+        }
+      },
+      "examples": [
+        {
+          "title": "Using Colors",
+          "code": "<View style={{ backgroundColor: colors.primary }} />"
+        },
+        {
+          "title": "Using Fonts",
+          "code": "<Text style={{ fontFamily: fonts.inter }} />"
+        },
+        {
+          "title": "Using Sizes",
+          "code": "<Text style={{ fontSize: size.md }} />"
+        }
+      ],
+      "features": [
+        "Comprehensive color palette",
+        "Normalized font sizes",
+        "Easy to customize",
+        "Consistent design system"
+      ]
+    }
+  ]
+}
+

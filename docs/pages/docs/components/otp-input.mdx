@@ -1,0 +1,53 @@
+# OTP Input
+
+A customizable OTP (One-Time Password) input component with validation states
+
+## Installation
+
+```bash
+npx expo-app-ui add otp-input
+```
+
+## Usage
+
+```tsx
+import OTPInput from "@/components/ui/otp-input";
+
+<OTPInput length={6} onChangeText={setOtp} onSubmit={(otp) => verifyOTP(otp)} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| length | number | 6 | Number of OTP digits |
+| onChangeText | (otp: string) => void | Required | Callback when OTP changes |
+| onSubmit | (otp: string) => void | - | Callback when OTP is complete |
+| autoFocus | boolean | false | Auto focus first input |
+| isLoading | boolean | false | Show loading state |
+| isDisabled | boolean | false | Disable all inputs |
+| isSuccess | boolean | false | Show success state |
+| isError | boolean | false | Show error state |
+
+## Examples
+
+### Basic OTP Input
+
+```tsx
+<OTPInput length={6} onChangeText={setOtp} onSubmit={(otp) => verifyOTP(otp)} />
+```
+
+### With Validation States
+
+```tsx
+<OTPInput length={6} onChangeText={setOtp} isLoading={isVerifying} isSuccess={isVerified} />
+```
+
+## Features
+
+- Individual input fields
+- Automatic focus management
+- Backspace handling
+- Validation states (success, error, loading)
+- Auto-submit when complete
+

@@ -1,0 +1,63 @@
+# Top Loading Bar Context
+
+A React Context for managing top loading bar state across your application
+
+## Installation
+
+```bash
+npx expo-app-ui add top-loading-bar
+```
+
+:::note
+This will automatically add required dependencies: loading-bar.
+:::
+
+## Usage
+
+```tsx
+import { LoadingProvider, useTopLoadingBar } from "@/context/top-loading-bar-context";
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| color | string | '#007AFF' | Loading bar color |
+| children | ReactNode | Required | App content |
+
+## Hook API
+
+### useTopLoadingBar
+
+| Method | Type | Description |
+|--------|------|-------------|
+| showLoading() | () => void | Shows the loading bar |
+| hideLoading() | () => void | Hides the loading bar |
+
+## Examples
+
+### Setup
+
+```tsx
+// Wrap your app
+<LoadingProvider color="#007AFF">
+  <App />
+</LoadingProvider>
+```
+
+### Usage
+
+```tsx
+const { showLoading, hideLoading } = useTopLoadingBar();
+
+showLoading(); // Show loading
+hideLoading(); // Hide loading
+```
+
+## Features
+
+- Global state management
+- Easy-to-use hook API
+- Customizable color
+- Automatic component integration
+
