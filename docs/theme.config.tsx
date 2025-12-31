@@ -8,7 +8,7 @@ const Footer = () => (
       Krish Panchani
     </a>
     {' X '}
-    <a href="https://thunderdevelops.com" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline' }}>
+    <a href="https://thunderdevelops.in" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline' }}>
       Thunder Develops
     </a>
     {' • Built with ❤️ for the Expo React Native community'}
