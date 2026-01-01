@@ -7,6 +7,6 @@ export default {
   "progress-bar": "Progress Bar",
   "marquee": "Marquee",
   "otp-input": "OTP Input",
-  "loading-bar": "Loading Bar"
+  "loading-bar": "Loading Bar & Context"
 }
 

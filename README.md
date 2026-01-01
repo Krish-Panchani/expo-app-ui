@@ -2,6 +2,19 @@
 
 A UI component library for Expo React Native. Copy components directly into your project and customize them to your needs.
 
+## Component Showcase
+
+<div align="center">
+  
+<img src="https://expo-apps-ui.vercel.app/examples/buttons-example.png" alt="Button Component" width="150" />
+<img src="https://expo-apps-ui.vercel.app/examples/custom-modal-example.gif" alt="Custom Modal" width="150" />
+<img src="https://expo-apps-ui.vercel.app/examples/otp-input-example.gif" alt="OTP Input" width="150" />
+<img src="https://expo-apps-ui.vercel.app/examples/top-loading-bar-example.gif" alt="Top Loading Bar" width="150" />
+
+*Button • Custom Modal • OTP Input • Loading Bar*
+
+</div>
+
 ## 📚 Documentation
 
 **👉 [View Full Documentation →](https://expo-apps-ui.vercel.app)**

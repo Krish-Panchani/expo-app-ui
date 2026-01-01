@@ -1,4 +1,4 @@
 export default {
-  "top-loading-bar-context": "Top Loading Bar Context"
+  // Top Loading Bar Context is now documented in components/loading-bar
 }
 

@@ -1,50 +1,274 @@
 ---
-title: Loading Bar Component
-description: An animated top loading bar component for showing loading states in Expo React Native. Learn how to use LoadingBar with examples and API documentation.
+title: Loading Bar & Top Loading Bar Context
+description: A top loading bar component with React Context for managing loading state across your Expo React Native application. Complete setup guide with examples.
 ---
 
-# Loading Bar
+# Loading Bar & Top Loading Bar Context
 
-An animated top loading bar component for showing loading states
+A top loading bar component with React Context for managing loading state across your application. The loading bar and context work together - you need both for the complete solution.
+
+<div style={{ textAlign: 'center', margin: '20px 0' }}>
+  <img 
+    src="/examples/top-loading-bar-example.gif" 
+    alt="Top Loading Bar Example" 
+    style={{ maxWidth: '150px', width: '100%', height: 'auto', borderRadius: '8px' }}
+  />
+</div>
 
 ## Installation
 
 ```bash
-npx expo-app-ui add loading-bar
+npx expo-app-ui add top-loading-bar
 ```
 
-## Usage
+:::note
+This command will automatically add both the `loading-bar` component and `top-loading-bar-context` context to your project, as they work together.
+:::
+
+## Step-by-Step Setup
+
+### Step 1: Wrap Your App with LoadingProvider
+
+Update your root `_layout.tsx` file to wrap your app with the `LoadingProvider`:
 
 ```tsx
-import LoadingBar from "@/components/ui/loading-bar";
+import { LoadingProvider } from "@/context/top-loading-bar-context";
+import { Stack } from "expo-router";
 
-<LoadingBar color="#007AFF" />
+export default function RootLayout() {
+  return (
+    <LoadingProvider>
+      <Stack />
+    </LoadingProvider>
+  );
+}
 ```
 
-## Props
+**Optional:** You can customize the loading bar color:
+
+```tsx
+<LoadingProvider color="#007AFF">
+  <Stack />
+</LoadingProvider>
+```
+
+### Step 2: Use the Hook in Your Components
+
+Now you can use the `useTopLoadingBar` hook in any component within your app:
+
+```tsx
+import { useTopLoadingBar } from "@/context/top-loading-bar-context";
+
+const { showLoading, hideLoading } = useTopLoadingBar();
+
+// Show loading bar
+showLoading();
+
+// Hide loading bar
+hideLoading();
+```
+
+## Complete Example
+
+Here's a complete example showing how to use the top loading bar in a screen:
+
+```tsx
+import CustomText from "@/components/ui/custom-text";
+import { useTopLoadingBar } from "@/context/top-loading-bar-context";
+import React from "react";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+
+export default function Index() {
+  const { showLoading, hideLoading } = useTopLoadingBar();
+
+  const handleStartLoading = () => {
+    showLoading();
+    // Simulate API call
+    setTimeout(() => {
+      hideLoading();
+    }, 3000);
+  };
+
+  return (
+    <View style={styles.container}>
+      <CustomText fontSize={28} style={styles.title}>
+        Top Loading Bar Demo
+      </CustomText>
+
+      <TouchableOpacity style={styles.button} onPress={handleStartLoading}>
+        <CustomText color="white" fontSize={16}>
+          Start Loading (3s)
+        </CustomText>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={[styles.button, styles.stopButton]}
+        onPress={hideLoading}
+      >
+        <CustomText color="white" fontSize={16}>
+          Stop Loading
+        </CustomText>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    paddingHorizontal: 24,
+    backgroundColor: "#FFFFFF",
+  },
+  title: {
+    textAlign: "center",
+    marginBottom: 40,
+  },
+  button: {
+    backgroundColor: "#007AFF",
+    paddingVertical: 14,
+    borderRadius: 10,
+    alignItems: "center",
+    marginBottom: 16,
+  },
+  stopButton: {
+    backgroundColor: "#FF3B30",
+  },
+});
+```
+
+## Setup in _layout.tsx
+
+Make sure to wrap your app with `LoadingProvider` in your root layout file:
+
+```tsx
+import { LoadingProvider } from "@/context/top-loading-bar-context";
+import { Stack } from "expo-router";
+
+export default function RootLayout() {
+  return (
+    <LoadingProvider>
+      <Stack />
+    </LoadingProvider>
+  );
+}
+```
+
+## Component API
+
+### LoadingBar Component
+
+The `LoadingBar` component is automatically rendered by the `LoadingProvider`. You typically don't need to use it directly.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| color | string | '#007AFF' | Loading bar color |
+| `color` | `string` | `"#007AFF"` | Loading bar color |
+
+### LoadingProvider
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `color` | `string` | `"#007AFF"` | Loading bar color |
+| `children` | `React.ReactNode` | Required | App content (usually your navigation stack) |
+
+## Hook API
+
+### useTopLoadingBar
+
+Returns an object with the following methods:
+
+| Method | Type | Description |
+|--------|------|-------------|
+| `showLoading()` | `() => void` | Shows the loading bar at the top of the screen |
+| `hideLoading()` | `() => void` | Hides the loading bar |
 
 ## Examples
 
-### Standalone
+### Basic Usage
 
 ```tsx
-<LoadingBar color="#007AFF" />
+import { useTopLoadingBar } from "@/context/top-loading-bar-context";
+
+function MyComponent() {
+  const { showLoading, hideLoading } = useTopLoadingBar();
+
+  const handleApiCall = async () => {
+    showLoading();
+    try {
+      await fetchData();
+    } finally {
+      hideLoading();
+    }
+  };
+
+  return <Button onPress={handleApiCall} title="Load Data" />;
+}
 ```
 
-### With Context (Recommended)
+### With Custom Color
 
 ```tsx
-// See top-loading-bar-context documentation
+// In _layout.tsx
+<LoadingProvider color="#16A34A">
+  <Stack />
+</LoadingProvider>
+```
+
+### Multiple Loading States
+
+```tsx
+function MyComponent() {
+  const { showLoading, hideLoading } = useTopLoadingBar();
+
+  const handleMultipleActions = async () => {
+    showLoading();
+    
+    await action1();
+    await action2();
+    await action3();
+    
+    hideLoading();
+  };
+
+  return <Button onPress={handleMultipleActions} title="Process" />;
+}
+```
+
+### With Error Handling
+
+```tsx
+const handleApiCall = async () => {
+  showLoading();
+  try {
+    const response = await fetch('/api/data');
+    if (!response.ok) throw new Error('Failed');
+    // Handle success
+  } catch (error) {
+    // Handle error
+  } finally {
+    hideLoading();
+  }
+};
 ```
 
 ## Features
 
-- Smooth infinite animation
-- Customizable color
-- Uses react-native-reanimated
-- Positioned at top of screen
+- **Global State Management**: Access loading state from any component
+- **Easy-to-Use Hook API**: Simple `showLoading()` and `hideLoading()` methods
+- **Customizable Color**: Set your preferred loading bar color
+- **Automatic Integration**: Loading bar component is automatically included
+- **Smooth Animations**: Built with React Native Reanimated for 60fps animations
+- **Top Position**: Always appears at the top of the screen with high z-index
+- **No Dependencies**: Self-contained context and component
+- **Infinite Loop Animation**: Continuous smooth scrolling animation
 
+## Notes
+
+- The `LoadingProvider` must wrap your entire app (usually in `_layout.tsx`)
+- The loading bar appears at the top of the screen with `position: absolute` and `zIndex: 9999`
+- The loading bar automatically animates in and out
+- You can call `showLoading()` and `hideLoading()` from any component within the provider
+- The default color is `#007AFF` (iOS blue), but you can customize it
+- The loading bar uses React Native Reanimated for smooth animations
+- Make sure to call `hideLoading()` after your async operations complete (use `finally` block for reliability)
+- Both `loading-bar` component and `top-loading-bar-context` are required - they work together as a complete solution
