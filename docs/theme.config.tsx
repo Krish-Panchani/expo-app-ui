@@ -24,36 +24,44 @@ const config: DocsThemeConfig = {
   footer: {
     component: <Footer />,
   },
-  head: (
-    <>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name="description" content="A modern UI component library for Expo React Native. Copy components directly into your project and customize them to your needs." />
-      <meta name="keywords" content="expo, react-native, ui, components, mobile, ios, android, cli, component-library, expo-ui, react-native-components" />
-      <meta name="author" content="Krish Panchani" />
-      <meta name="robots" content="index, follow" />
-      <link rel="canonical" href="https://expo-apps-ui.vercel.app" />
-      
-      {/* Open Graph */}
-      <meta property="og:type" content="website" />
-      <meta property="og:url" content="https://expo-apps-ui.vercel.app" />
-      <meta property="og:site_name" content="Expo App UI" />
-      <meta property="og:title" content="Expo App UI – React Native Component Library" />
-      <meta property="og:description" content="A modern UI component library for Expo React Native. Copy components directly into your project and customize them to your needs." />
-      <meta property="og:image" content="https://expo-apps-ui.vercel.app/og-image.png" />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content="Expo App UI" />
-      <meta property="og:locale" content="en_US" />
-      
-      {/* Twitter */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@krishpanchani" />
-      <meta name="twitter:creator" content="@krishpanchani" />
-      <meta name="twitter:title" content="Expo App UI – React Native Component Library" />
-      <meta name="twitter:description" content="A modern UI component library for Expo React Native. Copy components directly into your project and customize them to your needs." />
-      <meta name="twitter:image" content="https://expo-apps-ui.vercel.app/og-image.png" />
-    </>
-  ),
+  head: (props: any) => {
+    // Use the title from frontmatter, or fallback to default
+    const pageTitle = props?.title || 'Expo App UI – React Native Component Library'
+    const pageDescription = props?.meta?.description || 'A modern UI component library for Expo React Native. Copy components directly into your project and customize them to your needs.'
+    const siteUrl = 'https://expo-apps-ui.vercel.app'
+    
+    return (
+      <>
+        <title>{pageTitle}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content={pageDescription} />
+        <meta name="keywords" content="expo, react-native, ui, components, mobile, ios, android, cli, component-library, expo-ui, react-native-components" />
+        <meta name="author" content="Krish Panchani" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={siteUrl} />
+        
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={siteUrl} />
+        <meta property="og:site_name" content="Expo App UI" />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:image" content={`${siteUrl}/og-image.png`} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Expo App UI" />
+        <meta property="og:locale" content="en_US" />
+        
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@krishpanchani" />
+        <meta name="twitter:creator" content="@krishpanchani" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDescription} />
+        <meta name="twitter:image" content={`${siteUrl}/og-image.png`} />
+      </>
+    )
+  },
 }
 
 export default config
