@@ -1,7 +1,13 @@
-import { ActivityIndicator, View, ViewStyle } from "react-native";
+import React from "react";
+import { ActivityIndicator, View, ViewStyle, Text } from "react-native";
 import { Image } from "expo-image";
-import { colors, size } from "@/constants/theme";
-import CustomText from "@/components/ui/CustomText";
+
+// Default colors - using black and white as defaults
+const defaultColors = {
+  white: "#FFFFFF",
+  black: "#000000",
+  primary: "#000000", // Default to black
+};
 
 interface ProfilePicProps {
   source?: string;
@@ -24,10 +30,10 @@ const ProfilePic = ({
   username,
   width = 50,
   height = 50,
-  borderColor = colors.white,
+  borderColor = defaultColors.white,
   borderWidth = 1,
   borderRadius = 50,
-  backgroundColor = colors.primary,
+  backgroundColor = defaultColors.primary,
   isLoading = false,
   style,
 }: ProfilePicProps) => {
@@ -47,8 +53,7 @@ const ProfilePic = ({
     return (
       <View style={[combinedStyle, style]}>
         <ActivityIndicator
-          color={colors.white}
-          // style={{ borderColor: colors.white }}
+          color={defaultColors.white}
         />
       </View>
     );
@@ -65,9 +70,15 @@ const ProfilePic = ({
           transition={1000}
         />
       ) : (
-        <CustomText color={colors.white} fontSize={size.lg}>
+        <Text
+          style={{
+            color: defaultColors.white,
+            fontSize: 20,
+          }}
+          allowFontScaling={false}
+        >
           {username ? username.charAt(0).toUpperCase() : "Z"}
-        </CustomText>
+        </Text>
       )}
     </View>
   );

@@ -153,7 +153,20 @@ async function addComponent(componentName, options = {}) {
   const packageDir = getPackageDir();
   const templatesDir = path.join(packageDir, 'templates');
   
+  // Track processing to prevent circular dependencies
+  const processingSet = options.processingSet || new Set();
   const kebabName = toKebabCase(componentName);
+  
+  // Check if already processing this component to prevent infinite loops
+  const itemKey = `component:${kebabName}`;
+  if (processingSet.has(itemKey)) {
+    logger.debug(`Skipping ${componentName} - already being processed`);
+    return true;
+  }
+  
+  // Mark as processing
+  processingSet.add(itemKey);
+  
   const templatePath = path.join(templatesDir, 'components', 'ui', `${kebabName}.tsx`);
   const targetPath = path.join(config.getComponentsDir(), `${kebabName}.tsx`);
 
@@ -182,12 +195,17 @@ async function addComponent(componentName, options = {}) {
       }
     }
 
-    // Check for related context
-    const relatedContext = detectRelatedContext(kebabName, templatesDir);
-    if (relatedContext) {
-      const contextPath = path.join(projectRoot, 'context', `${relatedContext}.tsx`);
-      if (!fs.existsSync(contextPath)) {
-        dependenciesToAdd.push(`${relatedContext} context`);
+    // Check for related context (but skip if already processing to prevent loops)
+    // Only check if we're not being called from addContext (to prevent circular detection)
+    let relatedContext = null;
+    if (!options.skipRelatedCheck) {
+      relatedContext = detectRelatedContext(kebabName, templatesDir);
+      if (relatedContext) {
+        const contextPath = path.join(projectRoot, 'context', `${relatedContext}.tsx`);
+        const contextKey = `context:${relatedContext}`;
+        if (!fs.existsSync(contextPath) && !processingSet.has(contextKey)) {
+          dependenciesToAdd.push(`${relatedContext} context`);
+        }
       }
     }
 
@@ -222,15 +240,19 @@ async function addComponent(componentName, options = {}) {
       }
     }
 
-    // Add related context if needed
-    if (relatedContext) {
+    // Add related context if needed (pass processingSet to prevent loops)
+    // Only add if we're not being called from addContext (to prevent circular detection)
+    if (!options.skipRelatedCheck && relatedContext) {
       const contextPath = path.join(projectRoot, 'context', `${relatedContext}.tsx`);
-      if (!fs.existsSync(contextPath)) {
+      const contextKey = `context:${relatedContext}`;
+      if (!fs.existsSync(contextPath) && !processingSet.has(contextKey)) {
         await addContext(relatedContext, {
           logger,
           config,
           silent: false,
           overwrite: false,
+          processingSet,
+          skipRelatedCheck: true, // Prevent context from checking for related component again
         });
       }
     }
@@ -282,7 +304,20 @@ async function addContext(contextName, options = {}) {
   const packageDir = getPackageDir();
   const templatesDir = path.join(packageDir, 'templates');
   
+  // Track processing to prevent circular dependencies
+  const processingSet = options.processingSet || new Set();
   const kebabName = toKebabCase(contextName);
+  
+  // Check if already processing this context to prevent infinite loops
+  const itemKey = `context:${kebabName}`;
+  if (processingSet.has(itemKey)) {
+    logger.debug(`Skipping ${contextName} - already being processed`);
+    return true;
+  }
+  
+  // Mark as processing
+  processingSet.add(itemKey);
+  
   const templatePath = path.join(templatesDir, 'context', `${kebabName}.tsx`);
   const contextDir = path.join(projectRoot, 'context');
   const targetPath = path.join(contextDir, `${kebabName}.tsx`);
@@ -295,13 +330,14 @@ async function addContext(contextName, options = {}) {
     // Detect dependencies including related component
     const dependencies = detectDependencies(content);
     
-    // Check for related component
+    // Check for related component (but skip if already processing to prevent loops)
     const relatedComponent = detectRelatedComponent(kebabName, templatesDir);
     const dependenciesToAdd = [];
     
     if (relatedComponent) {
       const componentPath = path.join(config.getComponentsDir(), `${relatedComponent}.tsx`);
-      if (!fs.existsSync(componentPath)) {
+      const componentKey = `component:${relatedComponent}`;
+      if (!fs.existsSync(componentPath) && !processingSet.has(componentKey)) {
         dependenciesToAdd.push(`${relatedComponent} component`);
       }
     }
@@ -312,15 +348,19 @@ async function addContext(contextName, options = {}) {
       logger.debug('Adding required dependencies...\n');
     }
 
-    // Add related component if needed
+    // Add related component if needed (pass processingSet to prevent loops)
+    // Skip related check to prevent circular detection
     if (relatedComponent) {
       const componentPath = path.join(config.getComponentsDir(), `${relatedComponent}.tsx`);
-      if (!fs.existsSync(componentPath)) {
+      const componentKey = `component:${relatedComponent}`;
+      if (!fs.existsSync(componentPath) && !processingSet.has(componentKey)) {
         await addComponent(relatedComponent, {
           logger,
           config,
           silent: false,
           overwrite: false,
+          processingSet,
+          skipRelatedCheck: true, // Prevent component from checking for related context again
         });
       }
     }
@@ -456,10 +496,13 @@ async function handleAdd(name, options = {}) {
     return await addTopLoadingBar({ logger, config, overwrite });
   }
   
+  // Initialize processing set to track items and prevent circular dependencies
+  const processingSet = new Set();
+  
   // Check if it's a component (look in components/ui/)
   const componentPath = path.join(templatesDir, 'components', 'ui', `${kebabName}.tsx`);
   if (fs.existsSync(componentPath)) {
-    return await addComponent(name, { logger, config, overwrite });
+    return await addComponent(name, { logger, config, overwrite, processingSet });
   }
 
   // Check if it's a helper
@@ -478,11 +521,11 @@ async function handleAdd(name, options = {}) {
   const contextPathKebab = path.join(templatesDir, 'context', `${kebabName}.tsx`);
   const contextPathPascal = path.join(templatesDir, 'context', `${toPascalCase(kebabName)}.tsx`);
   if (fs.existsSync(contextPathKebab)) {
-    return await addContext(name, { logger, config, overwrite });
+    return await addContext(name, { logger, config, overwrite, processingSet });
   } else if (fs.existsSync(contextPathPascal)) {
     // Use the actual file name
     const actualName = path.basename(contextPathPascal, '.tsx');
-    return await addContext(actualName, { logger, config, overwrite });
+    return await addContext(actualName, { logger, config, overwrite, processingSet });
   }
 
   // Not found

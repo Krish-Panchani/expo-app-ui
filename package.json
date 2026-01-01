@@ -1,6 +1,6 @@
 {
   "name": "expo-app-ui",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A UI component library for Expo React Native. Copy components directly into your project and customize them to your needs. Documentation: https://expo-apps-ui.vercel.app",
   "main": "index.js",
   "bin": {
