@@ -614,6 +614,272 @@
         "Positioned at top of screen"
       ],
       "relatedContext": "top-loading-bar-context"
+    },
+    {
+      "slug": "accordion",
+      "name": "Accordion",
+      "description": "An expandable accordion component with smooth animations and customizable theming",
+      "category": "components",
+      "installation": "npx expo-app-ui add accordion",
+      "import": "import Accordion from \"@/components/ui/accordion\";",
+      "dependencies": [],
+      "props": [
+        {
+          "name": "data",
+          "type": "AccordionItem[]",
+          "default": "Required",
+          "description": "Array of accordion items with id, title, and content"
+        },
+        {
+          "name": "allowMultiple",
+          "type": "boolean",
+          "default": "false",
+          "description": "Allow multiple items to be open simultaneously"
+        },
+        {
+          "name": "defaultOpenIds",
+          "type": "string[]",
+          "default": "[]",
+          "description": "Array of item IDs to be open by default"
+        },
+        {
+          "name": "theme",
+          "type": "AccordionTheme",
+          "default": "{}",
+          "description": "Custom theme object for styling"
+        }
+      ],
+      "examples": [
+        {
+          "title": "Basic Accordion",
+          "code": "<Accordion data={[{ id: '1', title: 'Item 1', content: 'Content here' }]} />"
+        },
+        {
+          "title": "Multiple Open",
+          "code": "<Accordion data={data} allowMultiple />"
+        },
+        {
+          "title": "With Theme",
+          "code": "<Accordion data={data} theme={{ accentColor: '#7fb239' }} />"
+        }
+      ],
+      "features": [
+        "Smooth expand/collapse animations",
+        "Single or multiple open modes",
+        "Customizable theming",
+        "Pre-opened items support",
+        "Animated chevron rotation"
+      ]
+    },
+    {
+      "slug": "auto-scroll-cards",
+      "name": "Auto Scroll Cards",
+      "description": "A carousel component with auto-scrolling, manual swipe, and indicator support",
+      "category": "components",
+      "installation": "npx expo-app-ui add auto-scroll-cards",
+      "import": "import AutoScrollCards from \"@/components/ui/auto-scroll-cards\";",
+      "dependencies": [],
+      "props": [
+        {
+          "name": "data",
+          "type": "T[]",
+          "default": "Required",
+          "description": "Array of data items to display"
+        },
+        {
+          "name": "renderItem",
+          "type": "(item: T, index: number) => ReactNode",
+          "default": "Required",
+          "description": "Function to render each card"
+        },
+        {
+          "name": "cardWidth",
+          "type": "number",
+          "default": "Required",
+          "description": "Width of each card"
+        },
+        {
+          "name": "gap",
+          "type": "number",
+          "default": "12",
+          "description": "Gap between cards"
+        },
+        {
+          "name": "autoScroll",
+          "type": "boolean",
+          "default": "true",
+          "description": "Enable automatic scrolling"
+        },
+        {
+          "name": "interval",
+          "type": "number",
+          "default": "3000",
+          "description": "Auto-scroll interval in milliseconds"
+        },
+        {
+          "name": "loop",
+          "type": "boolean",
+          "default": "true",
+          "description": "Loop back to first card after last"
+        },
+        {
+          "name": "showIndicators",
+          "type": "boolean",
+          "default": "true",
+          "description": "Show dot indicators"
+        }
+      ],
+      "examples": [
+        {
+          "title": "Basic Auto-Scroll",
+          "code": "<AutoScrollCards data={items} cardWidth={300} renderItem={(item) => <Card {...item} />} />"
+        },
+        {
+          "title": "Manual Swipe Only",
+          "code": "<AutoScrollCards data={items} autoScroll={false} cardWidth={240} />"
+        },
+        {
+          "title": "Custom Interval",
+          "code": "<AutoScrollCards data={items} interval={2500} cardWidth={320} />"
+        }
+      ],
+      "features": [
+        "Automatic scrolling with configurable interval",
+        "Manual swipe support",
+        "Looping carousel",
+        "Dot indicators",
+        "Pause on user interaction",
+        "Smooth snap scrolling"
+      ]
+    },
+    {
+      "slug": "birthdate-picker",
+      "name": "Birthdate Picker",
+      "description": "A native-style date picker component for selecting birthdates with month, day, and year wheels",
+      "category": "components",
+      "installation": "npx expo-app-ui add birthdate-picker",
+      "import": "import CustomBirthdatePicker from \"@/components/ui/birthdate-picker\";",
+      "dependencies": [],
+      "props": [
+        {
+          "name": "initialDate",
+          "type": "Date",
+          "default": "new Date()",
+          "description": "Initial selected date"
+        },
+        {
+          "name": "onDateChange",
+          "type": "(date: string) => void",
+          "default": "Required",
+          "description": "Callback when date changes (returns YYYY-MM-DD format)"
+        }
+      ],
+      "examples": [
+        {
+          "title": "Basic Usage",
+          "code": "<CustomBirthdatePicker onDateChange={(date) => console.log(date)} />"
+        },
+        {
+          "title": "With Initial Date",
+          "code": "<CustomBirthdatePicker initialDate={new Date(2000, 0, 1)} onDateChange={handleDateChange} />"
+        }
+      ],
+      "features": [
+        "Native iOS-style picker wheels",
+        "Month, day, and year selection",
+        "Automatic day validation (handles leap years)",
+        "Modal presentation",
+        "Formatted date output (YYYY-MM-DD)",
+        "100 years of date range"
+      ]
+    },
+    {
+      "slug": "calender",
+      "name": "Calendar",
+      "description": "A flexible calendar component supporting single date selection, date ranges, and customizable theming",
+      "category": "components",
+      "installation": "npx expo-app-ui add calender",
+      "import": "import Calendar from \"@/components/ui/calender\";",
+      "dependencies": [],
+      "props": [
+        {
+          "name": "mode",
+          "type": "'single' | 'range'",
+          "default": "'single'",
+          "description": "Selection mode"
+        },
+        {
+          "name": "value",
+          "type": "Date",
+          "default": "-",
+          "description": "Selected date (for single mode)"
+        },
+        {
+          "name": "onChange",
+          "type": "(date: Date) => void",
+          "default": "-",
+          "description": "Callback when date changes (for single mode)"
+        },
+        {
+          "name": "rangeValue",
+          "type": "DateRange",
+          "default": "{ start: null, end: null }",
+          "description": "Selected date range (for range mode)"
+        },
+        {
+          "name": "onRangeChange",
+          "type": "(range: DateRange) => void",
+          "default": "-",
+          "description": "Callback when range changes (for range mode)"
+        },
+        {
+          "name": "minDate",
+          "type": "string",
+          "default": "-",
+          "description": "Minimum selectable date (YYYY-MM-DD)"
+        },
+        {
+          "name": "maxDate",
+          "type": "string",
+          "default": "-",
+          "description": "Maximum selectable date (YYYY-MM-DD)"
+        },
+        {
+          "name": "allowFutureDates",
+          "type": "boolean",
+          "default": "false",
+          "description": "Allow selection of future dates"
+        },
+        {
+          "name": "theme",
+          "type": "CalendarTheme",
+          "default": "{}",
+          "description": "Custom theme object for styling"
+        }
+      ],
+      "examples": [
+        {
+          "title": "Single Date Selection",
+          "code": "<Calendar mode=\"single\" value={date} onChange={setDate} />"
+        },
+        {
+          "title": "Date Range",
+          "code": "<Calendar mode=\"range\" rangeValue={range} onRangeChange={setRange} />"
+        },
+        {
+          "title": "With Date Limits",
+          "code": "<Calendar minDate=\"1900-01-01\" maxDate={today} allowFutureDates={false} />"
+        }
+      ],
+      "features": [
+        "Single date and range selection modes",
+        "Month and year picker modals",
+        "Date range highlighting",
+        "Customizable theming",
+        "Min/max date constraints",
+        "Future date restriction",
+        "Smooth navigation"
+      ]
     }
   ],
   "contexts": [

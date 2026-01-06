@@ -1,0 +1,179 @@
+---
+title: Birthdate Picker Component – Expo App UI
+description: A native-style date picker component for selecting birthdates with month, day, and year wheels for Expo React Native. Learn how to use CustomBirthdatePicker with examples and API documentation.
+---
+
+# Birthdate Picker
+
+A native-style date picker component for selecting birthdates with month, day, and year wheels
+
+<div style={{ textAlign: 'center', margin: '20px 0' }}>
+  <img 
+    src="/examples/celender-example.gif" 
+    alt="Birthdate Picker Component Example" 
+    style={{ maxWidth: '150px', width: '100%', height: 'auto', borderRadius: '8px' }}
+  />
+</div>
+
+## Installation
+
+```bash
+npx expo-app-ui add birthdate-picker
+```
+
+:::note
+The birthdate picker component requires `@expo/vector-icons` for the calendar icon. Make sure it's installed in your project.
+:::
+
+## Usage
+
+```tsx
+import CustomBirthdatePicker from "@/components/ui/birthdate-picker";
+
+<CustomBirthdatePicker 
+  onDateChange={(date) => console.log(date)} 
+/>
+```
+
+## Complete Example
+
+Here's a complete example showing the birthdate picker:
+
+```tsx
+import CustomBirthdatePicker from "@/components/ui/birthdate-picker";
+import React, { useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
+
+export default function BirthdatePickerExample() {
+  const [selectedDate, setSelectedDate] = useState<string>("");
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.heading}>Birthdate Picker Example</Text>
+
+      <CustomBirthdatePicker
+        initialDate={new Date(2000, 0, 1)}
+        onDateChange={(date) => {
+          setSelectedDate(date);
+          console.log("Selected date:", date);
+        }}
+      />
+
+      {selectedDate && (
+        <Text style={styles.result}>
+          Selected: {selectedDate}
+        </Text>
+      )}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 24,
+    backgroundColor: "#FFFFFF",
+  },
+  heading: {
+    fontSize: 22,
+    fontWeight: "600",
+    textAlign: "center",
+    marginBottom: 20,
+  },
+  result: {
+    marginTop: 20,
+    textAlign: "center",
+    fontSize: 14,
+    color: "#333",
+  },
+});
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `initialDate` | `Date` | `new Date()` | Initial selected date |
+| `onDateChange` | `(date: string) => void` | Required | Callback when date changes (returns YYYY-MM-DD format) |
+
+## Examples
+
+### Basic Usage
+
+```tsx
+<CustomBirthdatePicker 
+  onDateChange={(date) => {
+    console.log("Selected date:", date);
+  }} 
+/>
+```
+
+### With Initial Date
+
+```tsx
+<CustomBirthdatePicker
+  initialDate={new Date(2000, 0, 1)}
+  onDateChange={handleDateChange}
+/>
+```
+
+### In a Form
+
+```tsx
+const [birthdate, setBirthdate] = useState<string>("");
+
+<CustomBirthdatePicker
+  initialDate={new Date(1990, 5, 15)}
+  onDateChange={(date) => setBirthdate(date)}
+/>
+
+{birthdate && (
+  <Text>Birthdate: {birthdate}</Text>
+)}
+```
+
+## Features
+
+- **Native iOS-Style Picker**: Three-wheel picker for month, day, and year
+- **Automatic Day Validation**: Handles leap years and month-specific day limits
+- **Modal Presentation**: Opens in a modal overlay
+- **Formatted Output**: Returns date in YYYY-MM-DD format
+- **100 Years Range**: Supports dates from 100 years ago to today
+- **Visual Feedback**: Highlighted selection area
+- **Smooth Scrolling**: Native scroll behavior with snap-to-item
+- **Cancel/Done Actions**: Clear user actions for selection
+
+## Date Format
+
+The `onDateChange` callback returns dates in **YYYY-MM-DD** format:
+
+```tsx
+onDateChange={(date) => {
+  // date will be: "2000-01-15"
+  console.log(date);
+}}
+```
+
+## Notes
+
+- The component automatically adjusts the day picker when month or year changes
+- For example, if you select February, days 29-31 are automatically removed
+- Leap years are handled automatically (February 29 is available in leap years)
+- The year range is from 100 years ago to the current year
+- The modal can be dismissed by tapping outside or using Cancel button
+- Changes are only applied when "Done" is pressed
+- The component uses `@expo/vector-icons` for the calendar icon
+- All dates are in local timezone
+- The input field shows the selected date in readable format (e.g., "15 January 2000")
+
+## Styling
+
+The component uses a clean, native iOS-style design with:
+- Light gray borders
+- Blue accent color for selected items
+- Semi-transparent overlay background
+- Rounded corners on modal and input
+- Smooth animations
+
+You can customize the colors by modifying the `COLORS` constant in the component file.
+

@@ -30,6 +30,10 @@ const config: DocsThemeConfig = {
     link: 'https://github.com/Krish-Panchani/expo-app-ui',
   },
   docsRepositoryBase: 'https://github.com/Krish-Panchani/expo-app-ui',
+  sidebar: {
+    defaultMenuCollapseLevel: 1,
+    toggleButton: true,
+  },
   navbar: {
     extraContent: (
       <a

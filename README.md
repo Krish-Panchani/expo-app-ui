@@ -2,6 +2,23 @@
 
 A UI component library for Expo React Native. Copy components directly into your project and customize them to your needs.
 
+## 🎉 Recently Added Components
+
+We've just added **4 new components** to the library:
+
+- **Accordion** - Expandable accordion with smooth animations
+- **Auto Scroll Cards** - Carousel with auto-scrolling and manual swipe
+- **Birthdate Picker** - Native-style date picker with month/day/year wheels
+- **Calendar** - Flexible calendar with single date and range selection
+
+Try them out:
+```bash
+npx expo-app-ui add accordion
+npx expo-app-ui add auto-scroll-cards
+npx expo-app-ui add birthdate-picker
+npx expo-app-ui add calender
+```
+
 ## Component Showcase
 
 <div align="center">
@@ -10,8 +27,11 @@ A UI component library for Expo React Native. Copy components directly into your
 <img src="https://expo-apps-ui.vercel.app/examples/custom-modal-example.gif" alt="Custom Modal" width="150" />
 <img src="https://expo-apps-ui.vercel.app/examples/otp-input-example.gif" alt="OTP Input" width="150" />
 <img src="https://expo-apps-ui.vercel.app/examples/top-loading-bar-example.gif" alt="Top Loading Bar" width="150" />
+<img src="https://expo-apps-ui.vercel.app/examples/accordion-example.gif" alt="Accordion" width="150" />
+<img src="https://expo-apps-ui.vercel.app/examples/auto-scroll-cards-example.gif" alt="Auto Scroll Cards" width="150" />
+<img src="https://expo-apps-ui.vercel.app/examples/celender-example.gif" alt="Calendar" width="150" />
 
-*Button • Custom Modal • OTP Input • Loading Bar*
+*Button • Custom Modal • OTP Input • Loading Bar • Accordion • Auto Scroll Cards • Calendar*
 
 </div>
 
@@ -185,6 +205,10 @@ module.exports = {
 - `marquee` - A scrolling marquee component
 - `otp-input` - An OTP input component
 - `loading-bar` - An animated top loading bar component
+- `accordion` - An expandable accordion component with smooth animations
+- `auto-scroll-cards` - A carousel component with auto-scrolling and manual swipe
+- `birthdate-picker` - A native-style date picker for selecting birthdates
+- `calender` - A flexible calendar component with single date and range selection
 
 ## Available Contexts
 
