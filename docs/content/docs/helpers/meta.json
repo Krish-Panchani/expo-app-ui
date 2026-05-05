@@ -1,0 +1,5 @@
+{
+  "title": "Helpers",
+  "icon": "Wrench",
+  "pages": ["normalizeSize"]
+}

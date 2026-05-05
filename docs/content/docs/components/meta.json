@@ -1,0 +1,19 @@
+{
+  "title": "Components",
+  "icon": "Sparkles",
+  "pages": [
+    "button",
+    "custom-text",
+    "box-view",
+    "custom-modal",
+    "accordion",
+    "calender",
+    "birthdate-picker",
+    "otp-input",
+    "profile-pic",
+    "progress-bar",
+    "loading-bar",
+    "marquee",
+    "auto-scroll-cards"
+  ]
+}
