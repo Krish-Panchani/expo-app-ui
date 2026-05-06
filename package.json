@@ -1,7 +1,7 @@
 {
   "name": "expo-app-ui",
-  "version": "1.0.5",
-  "description": "A UI component library for Expo React Native. Copy components directly into your project and customize them to your needs. Documentation: https://expo-apps-ui.vercel.app",
+  "version": "1.0.6",
+  "description": "Production-ready, copy-paste React Native components for Expo. TypeScript-first, accessible, New Architecture compatible, with minimal peer dependencies. Customize freely — your code, your rules. Docs: https://expo-ui.thunderdevelops.in",
   "main": "index.js",
   "bin": {
     "expo-app-ui": "bin/expo-app-ui.js"
@@ -13,7 +13,29 @@
     "README.md"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:unit": "jest tests/unit",
+    "test:integration": "jest tests/integration",
+    "test:coverage": "jest --coverage"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "<rootDir>/tests/**/*.test.js"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/**/index.js"
+    ],
+    "coverageDirectory": "coverage",
+    "coverageReporters": [
+      "text",
+      "lcov"
+    ]
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   },
   "keywords": [
     "expo",
@@ -40,7 +62,7 @@
   "bugs": {
     "url": "https://github.com/Krish-Panchani/expo-app-ui/issues"
   },
-  "homepage": "https://expo-apps-ui.vercel.app",
+  "homepage": "https://expo-ui.thunderdevelops.in",
   "engines": {
     "node": ">=14.0.0"
   },

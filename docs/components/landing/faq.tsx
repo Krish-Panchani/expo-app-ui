@@ -1,27 +1,35 @@
 const faqs = [
   {
-    q: 'Is Expo App UI free to use?',
-    a: 'Yes. Expo App UI is open-source under the MIT license — free for personal and commercial projects.',
+    q: 'Is Expo App UI production-ready?',
+    a: 'Yes. Every component is built for real apps — TypeScript strict mode with explicit prop interfaces, accessibility props (role, state, value, live regions) wired in, controlled/uncontrolled modes where it matters, and an automated test suite for the CLI. Components are designed around best-practice React Native patterns, not toy examples.',
+  },
+  {
+    q: 'Is it free to use?',
+    a: 'Yes. Expo App UI is open-source under the MIT license — free for personal and commercial projects, no attribution required.',
   },
   {
     q: 'How is this different from React Native Paper or NativeBase?',
-    a: 'Those libraries ship as packaged components you import. Expo App UI copies the actual source into your project — you own the code, can edit anything, and have zero runtime dependencies.',
+    a: 'Those libraries ship as packaged components you import — you trade flexibility for convenience and add runtime weight. Expo App UI copies the actual source into your project: you own the code, edit anything, and avoid runtime dependency cost. See our full comparison page in the docs.',
+  },
+  {
+    q: 'Does it support the New Architecture (Fabric / TurboModules)?',
+    a: 'Yes. Components are tested against Expo SDK 52+ with newArchEnabled: true. No legacy bridge APIs, no findNodeHandle, no deprecated lifecycle methods. The Old Architecture is also still supported.',
+  },
+  {
+    q: 'Will it bloat my bundle?',
+    a: 'No. You only ship what you copy in — there is no library runtime. Most components have zero required peer dependencies; a few (bottom-sheet, custom-modal, slider) optionally use Reanimated or gesture-handler when present. Your screens stay lightweight.',
   },
   {
     q: 'Does it work with bare React Native (not Expo)?',
-    a: 'Components are written for React Native and most work in bare RN projects. Some use Expo-specific APIs like expo-image — check each component’s docs.',
-  },
-  {
-    q: 'Can I use these components in production?',
-    a: 'Absolutely. Components are TypeScript-first, performance-optimized with Reanimated, and battle-tested in shipped apps.',
+    a: 'Most components work in bare RN projects. A few use Expo-specific APIs (e.g. expo-image) and are noted on their docs page. You can usually swap those for RN equivalents in a couple lines since you own the code.',
   },
   {
     q: 'How do I update components after copying them?',
-    a: 'Since you own the code, updates are intentional. Re-run `npx expo-app-ui add <component>` to overwrite, or cherry-pick changes from GitHub.',
+    a: 'Since you own the code, updates are intentional — they never break your app silently. Re-run `npx expo-app-ui add <component> --overwrite` to pull the latest, or cherry-pick specific changes from GitHub.',
   },
   {
     q: 'Will more components be added?',
-    a: 'Yes — the library grows based on community needs. Open an issue on GitHub to request a component.',
+    a: 'Yes — the library grows based on community needs and follows the same production-readiness bar (a11y, types, tests). Open an issue on GitHub to request or contribute one.',
   },
 ];
 

@@ -1,10 +1,12 @@
 import { Hero } from '@/components/landing/hero';
 import { Stats } from '@/components/landing/stats';
 import { Features } from '@/components/landing/features';
+import { Categories } from '@/components/landing/categories';
 import { ComponentsPreview } from '@/components/landing/components-preview';
 import { InstallSteps } from '@/components/landing/install-steps';
 import { FAQ } from '@/components/landing/faq';
 import { CTA } from '@/components/landing/cta';
+import { SiteFooter } from '@/components/landing/site-footer';
 import type { Metadata } from 'next';
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/utils';
 
@@ -26,10 +28,12 @@ export default function HomePage() {
       <Hero />
       <Stats />
       <ComponentsPreview />
+      <Categories />
       <Features />
       <InstallSteps />
       <FAQ />
       <CTA />
+      <SiteFooter />
     </main>
   );
 }

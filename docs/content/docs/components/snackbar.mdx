@@ -1,0 +1,42 @@
+---
+title: Snackbar
+description: Bottom-anchored notification with an optional action button. Material Design style.
+---
+
+## Installation
+
+```bash
+npx expo-app-ui add snackbar
+```
+
+## Usage
+
+```tsx
+import Snackbar from "@/components/ui/snackbar";
+
+<Snackbar
+  visible={show}
+  message="Item moved to trash"
+  action={{ label: "Undo", onPress: handleUndo }}
+  onDismiss={() => setShow(false)}
+/>
+```
+
+## Props
+
+| Prop                | Type                              | Default       | Description                   |
+| ------------------- | --------------------------------- | ------------- | ----------------------------- |
+| `visible`           | `boolean`                         | required      | Show/hide                     |
+| `message`           | `string`                          | required      | Snackbar text                 |
+| `action`            | `{ label, onPress }`              | -             | Optional action button        |
+| `duration`          | `number`                          | `4000`        | Auto-dismiss ms (`0` sticky)  |
+| `onDismiss`         | `() => void`                      | -             | Called after fade-out         |
+| `backgroundColor`   | `string`                          | `'#1F2937'`   | Bar background                |
+| `textColor`         | `string`                          | `'#FFFFFF'`   | Message color                 |
+| `actionColor`       | `string`                          | `'#60A5FA'`   | Action label color            |
+| `bottomOffset`      | `number`                          | `24`          | Bottom inset                  |
+
+## Accessibility
+
+- `accessibilityRole="alert"` with `accessibilityLiveRegion="polite"`
+- Action button is a focusable `Pressable` with `accessibilityRole="button"`

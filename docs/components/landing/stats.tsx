@@ -1,6 +1,6 @@
 const stats = [
-  { value: '13', label: 'Components' },
-  { value: '0', label: 'External deps' },
+  { value: '27+', label: 'Production-ready components' },
+  { value: '0', label: 'Required peer deps' },
   { value: '100%', label: 'TypeScript' },
   { value: 'MIT', label: 'License' },
 ];

@@ -1,13 +1,7 @@
 import { HomeLayout } from 'fumadocs-ui/layouts/home';
 import type { ReactNode } from 'react';
-import { baseOptions } from '../layout.config';
-import { SiteFooter } from '@/components/landing/site-footer';
+import { homeOptions } from '../layout.config';
 
 export default function Layout({ children }: { children: ReactNode }) {
-  return (
-    <HomeLayout {...baseOptions}>
-      {children}
-      <SiteFooter />
-    </HomeLayout>
-  );
+  return <HomeLayout {...homeOptions}>{children}</HomeLayout>;
 }

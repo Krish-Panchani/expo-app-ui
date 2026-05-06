@@ -22,10 +22,11 @@ export function ComponentsPreview() {
           <div className="max-w-2xl">
             <p className="text-sm font-medium text-fd-muted-foreground">Component Library</p>
             <h2 className="mt-3 text-3xl md:text-5xl font-semibold tracking-tight">
-              13 components. Infinite possibilities.
+              27+ components. Production-grade.
             </h2>
             <p className="mt-4 text-lg text-fd-muted-foreground leading-relaxed">
-              Each component is hand-crafted, accessible, and ready to drop into your Expo app.
+              Buttons, dialogs, sheets, toasts, sliders, tabs, calendar, and more. Each one is
+              hand-crafted, accessible, TypeScript-typed, and ready to drop into your Expo app.
             </p>
           </div>
           <Link

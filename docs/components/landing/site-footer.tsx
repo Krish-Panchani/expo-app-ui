@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Package } from 'lucide-react';
 import { GithubIcon } from '@/components/icons';
+import { BuyMeACoffeeButton } from '@/components/bmc-button';
 
 const links = {
   Documentation: [
@@ -42,7 +43,10 @@ export function SiteFooter() {
               Beautifully designed, copy-paste React Native components for Expo.
               Built for developers who care about quality.
             </p>
-            <div className="mt-5 flex gap-2">
+            <div className="mt-5">
+              <BuyMeACoffeeButton />
+            </div>
+            <div className="mt-4 flex gap-2">
               <a
                 href="https://github.com/Krish-Panchani/expo-app-ui"
                 target="_blank"

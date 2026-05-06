@@ -1,0 +1,47 @@
+---
+title: Radio Group
+description: Single-select group of radio options with horizontal or vertical layout.
+---
+
+## Installation
+
+```bash
+npx expo-app-ui add radio-group
+```
+
+## Usage
+
+```tsx
+import RadioGroup from "@/components/ui/radio-group";
+import { useState } from "react";
+
+const [plan, setPlan] = useState<"free" | "pro">("free");
+
+<RadioGroup
+  value={plan}
+  onChange={setPlan}
+  options={[
+    { label: "Free", value: "free" },
+    { label: "Pro",  value: "pro" },
+  ]}
+/>
+```
+
+## Props
+
+| Prop          | Type                                          | Default       | Description                              |
+| ------------- | --------------------------------------------- | ------------- | ---------------------------------------- |
+| `options`     | `RadioOption<T>[]`                            | required      | Available options                        |
+| `value`       | `T \| null`                                   | required      | Selected value                           |
+| `onChange`    | `(v: T) => void`                              | required      | Change handler                           |
+| `direction`   | `'vertical' \| 'horizontal'`                  | `'vertical'`  | Layout direction                         |
+| `size`        | `'sm' \| 'md' \| 'lg'`                        | `'md'`        | Radio size                               |
+| `color`       | `string`                                      | `'#2563EB'`   | Selected color                           |
+| `borderColor` | `string`                                      | `'#9CA3AF'`   | Unselected border                        |
+
+`RadioOption` shape: `{ label: string; value: T; disabled?: boolean }`.
+
+## Accessibility
+
+- Container: `accessibilityRole="radiogroup"`
+- Each option: `accessibilityRole="radio"` with `accessibilityState.selected`

@@ -1,0 +1,40 @@
+---
+title: Checkbox
+description: Accessible checkbox with optional indeterminate state and label support.
+---
+
+## Installation
+
+```bash
+npx expo-app-ui add checkbox
+```
+
+## Usage
+
+```tsx
+import Checkbox from "@/components/ui/checkbox";
+import { useState } from "react";
+
+const [v, setV] = useState(false);
+<Checkbox value={v} onValueChange={setV} label="Accept terms" />
+```
+
+## Props
+
+| Prop                 | Type                       | Default     | Description                       |
+| -------------------- | -------------------------- | ----------- | --------------------------------- |
+| `value`              | `boolean`                  | required    | Checked state                     |
+| `onValueChange`      | `(v: boolean) => void`     | required    | Change handler                    |
+| `label`              | `string`                   | -           | Optional label text               |
+| `disabled`           | `boolean`                  | `false`     | Disable interaction               |
+| `size`               | `'sm' \| 'md' \| 'lg'`     | `'md'`      | Checkbox size                     |
+| `color`              | `string`                   | `'#2563EB'` | Checked color                     |
+| `borderColor`        | `string`                   | `'#9CA3AF'` | Unchecked border                  |
+| `uncheckedBg`        | `string`                   | `'transparent'` | Unchecked background          |
+| `indeterminate`      | `boolean`                  | `false`     | Show indeterminate state          |
+| `accessibilityLabel` | `string`                   | label       | Screen-reader label               |
+
+## Accessibility
+
+- `accessibilityRole="checkbox"`
+- `accessibilityState.checked` is `true`, `false`, or `'mixed'` for indeterminate

@@ -1,0 +1,40 @@
+---
+title: Avatar
+description: User avatar with image, initials fallback, and optional online/offline status indicator.
+---
+
+## Installation
+
+```bash
+npx expo-app-ui add avatar
+```
+
+## Usage
+
+```tsx
+import Avatar from "@/components/ui/avatar";
+
+<Avatar source={{ uri: "https://i.pravatar.cc/100" }} name="Krish Panchani" size="md" />
+<Avatar name="Krish Panchani" size="lg" showStatus status="online" />
+```
+
+## Props
+
+| Prop                 | Type                                                       | Default      | Description                       |
+| -------------------- | ---------------------------------------------------------- | ------------ | --------------------------------- |
+| `source`             | `ImageSourcePropType`                                      | -            | Image source                      |
+| `name`               | `string`                                                   | -            | Used to derive initials fallback  |
+| `size`               | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| number`           | `'md'`       | Avatar size                       |
+| `rounded`            | `boolean`                                                  | `true`       | Circle vs squircle                |
+| `backgroundColor`    | `string`                                                   | `'#E5E7EB'`  | Fallback background               |
+| `textColor`          | `string`                                                   | `'#374151'`  | Initials color                    |
+| `status`             | `'online' \| 'offline' \| 'busy' \| 'away'`                | -            | Status indicator color            |
+| `showStatus`         | `boolean`                                                  | `false`      | Render the status dot             |
+| `style`              | `StyleProp<ViewStyle>`                                     | -            | Container style override          |
+| `imageStyle`         | `StyleProp<ImageStyle>`                                    | -            | Image style override              |
+| `accessibilityLabel` | `string`                                                   | `Avatar for {name}` | Screen-reader label        |
+
+## Accessibility
+
+- `accessibilityRole="image"`
+- Provides a meaningful default label using `name`

@@ -1,0 +1,39 @@
+---
+title: Tooltip
+description: Long-press tooltip that auto-positions and clamps within the viewport.
+---
+
+## Installation
+
+```bash
+npx expo-app-ui add tooltip
+```
+
+## Usage
+
+```tsx
+import Tooltip from "@/components/ui/tooltip";
+
+<Tooltip content="Save your changes" placement="top">
+  <Button title="Save" onPress={() => {}} />
+</Tooltip>
+```
+
+## Props
+
+| Prop               | Type                                         | Default      | Description                       |
+| ------------------ | -------------------------------------------- | ------------ | --------------------------------- |
+| `content`          | `string`                                     | required     | Tooltip text                      |
+| `children`         | `ReactElement`                               | required     | Trigger element                   |
+| `placement`        | `'top' \| 'bottom' \| 'left' \| 'right'`     | `'top'`      | Preferred placement               |
+| `backgroundColor`  | `string`                                     | `'#1F2937'`  | Tooltip background                |
+| `textColor`        | `string`                                     | `'#FFFFFF'`  | Text color                        |
+| `offset`           | `number`                                     | `8`          | Gap from trigger                  |
+| `maxWidth`         | `number`                                     | `240`        | Max tooltip width                 |
+| `disabled`         | `boolean`                                    | `false`      | Disable trigger                   |
+
+## Accessibility
+
+- Trigger has `accessibilityHint`
+- Tooltip body has `accessibilityRole="text"` with the content as label
+- Tap outside or anywhere to dismiss

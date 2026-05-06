@@ -10,10 +10,11 @@ export function CTA() {
           <div className="absolute inset-0 bg-grid bg-radial-fade opacity-30 pointer-events-none" />
           <div className="relative">
             <h2 className="text-3xl md:text-5xl font-semibold tracking-tight max-w-2xl mx-auto">
-              Start building beautiful Expo apps today.
+              Ship production-grade Expo apps.
             </h2>
             <p className="mt-4 text-lg text-fd-muted-foreground max-w-xl mx-auto">
-              Free, open-source, and built for the React Native community.
+              Free, open-source, MIT-licensed. Designed for real apps — TypeScript, accessibility,
+              New Architecture, and minimal peer deps from day one.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
               <Link
@@ -23,7 +24,7 @@ export function CTA() {
                 Read the docs
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
-              <CopyCommand command="npx expo-app-ui init" />
+              <CopyCommand command="npx expo-app-ui add button" />
             </div>
           </div>
         </div>

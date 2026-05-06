@@ -1,0 +1,50 @@
+---
+title: Slider
+description: Touch-driven value slider with optional stepping and accessibility increment/decrement support.
+---
+
+## Installation
+
+```bash
+npx expo-app-ui add slider
+```
+
+## Usage
+
+```tsx
+import Slider from "@/components/ui/slider";
+import { useState } from "react";
+
+const [v, setV] = useState(50);
+
+<Slider
+  value={v}
+  onValueChange={setV}
+  minimumValue={0}
+  maximumValue={100}
+  step={1}
+/>
+```
+
+## Props
+
+| Prop                       | Type                       | Default     | Description                              |
+| -------------------------- | -------------------------- | ----------- | ---------------------------------------- |
+| `value`                    | `number`                   | required    | Current value                            |
+| `onValueChange`            | `(v: number) => void`      | required    | Continuous change handler                |
+| `onSlidingComplete`        | `(v: number) => void`      | -           | Called on release                        |
+| `minimumValue`             | `number`                   | `0`         | Min value                                |
+| `maximumValue`             | `number`                   | `100`       | Max value                                |
+| `step`                     | `number`                   | `0`         | Snap step (`0` = continuous)             |
+| `disabled`                 | `boolean`                  | `false`     | Disable interaction                      |
+| `trackHeight`              | `number`                   | `4`         | Track thickness                          |
+| `thumbSize`                | `number`                   | `20`        | Thumb diameter                           |
+| `minimumTrackTintColor`    | `string`                   | `'#2563EB'` | Filled track color                       |
+| `maximumTrackTintColor`    | `string`                   | `'#E5E7EB'` | Empty track color                        |
+| `thumbTintColor`           | `string`                   | `'#FFFFFF'` | Thumb fill                               |
+
+## Accessibility
+
+- `accessibilityRole="adjustable"`
+- `accessibilityValue={{ min, max, now }}`
+- Supports VoiceOver/TalkBack increment/decrement actions

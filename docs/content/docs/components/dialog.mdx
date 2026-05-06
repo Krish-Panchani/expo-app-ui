@@ -1,0 +1,54 @@
+---
+title: Dialog
+description: Confirmation and alert dialog with title, description, and configurable actions.
+---
+
+## Installation
+
+```bash
+npx expo-app-ui add dialog
+```
+
+## Usage
+
+```tsx
+import Dialog from "@/components/ui/dialog";
+import { useState } from "react";
+
+const [open, setOpen] = useState(false);
+
+<Dialog
+  visible={open}
+  onDismiss={() => setOpen(false)}
+  title="Delete item?"
+  description="This action cannot be undone."
+  actions={[
+    { label: "Cancel", onPress: () => setOpen(false), variant: "secondary" },
+    { label: "Delete", onPress: handleDelete, variant: "danger" },
+  ]}
+/>
+```
+
+## Props
+
+| Prop                  | Type                                | Default              | Description                       |
+| --------------------- | ----------------------------------- | -------------------- | --------------------------------- |
+| `visible`             | `boolean`                           | required             | Show/hide                         |
+| `onDismiss`           | `() => void`                        | required             | Dismiss handler                   |
+| `title`               | `string`                            | -                    | Dialog title                      |
+| `description`         | `string`                            | -                    | Dialog body text                  |
+| `children`            | `ReactNode`                         | -                    | Custom content                    |
+| `actions`             | `DialogAction[]`                    | -                    | Footer action buttons             |
+| `dismissOnBackdrop`   | `boolean`                           | `true`               | Tap backdrop to close             |
+| `dismissOnBackPress`  | `boolean`                           | `true`               | Android back to close             |
+| `backgroundColor`     | `string`                            | `'#FFFFFF'`          | Dialog bg                         |
+| `backdropColor`       | `string`                            | `'rgba(0,0,0,0.5)'`  | Backdrop color                    |
+| `borderRadius`        | `number`                            | `14`                 | Dialog radius                     |
+
+`DialogAction`: `{ label: string; onPress: () => void; variant?: 'primary' | 'secondary' | 'danger'; disabled?: boolean }`.
+
+## Accessibility
+
+- `accessibilityRole="alert"` on the dialog
+- `accessibilityViewIsModal` on the modal
+- Native Android back press is handled when `dismissOnBackPress` is true

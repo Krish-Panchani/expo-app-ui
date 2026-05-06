@@ -1,0 +1,55 @@
+---
+title: Bottom Sheet
+description: Modal bottom sheet with swipe-to-dismiss, dynamic content height, and animated backdrop.
+---
+
+## Installation
+
+```bash
+npx expo-app-ui add bottom-sheet
+```
+
+## Usage
+
+```tsx
+import BottomSheet from "@/components/ui/bottom-sheet";
+import { useState } from "react";
+import { Text, View } from "react-native";
+
+const [open, setOpen] = useState(false);
+
+<BottomSheet visible={open} onClose={() => setOpen(false)}>
+  <View>
+    <Text style={{ fontSize: 18, fontWeight: "600" }}>Settings</Text>
+    {/* …content */}
+  </View>
+</BottomSheet>
+```
+
+## Props
+
+| Prop                | Type                                 | Default              | Description                              |
+| ------------------- | ------------------------------------ | -------------------- | ---------------------------------------- |
+| `visible`           | `boolean`                            | required             | Show/hide                                |
+| `onClose`           | `() => void`                         | required             | Close handler                            |
+| `children`          | `ReactNode`                          | required             | Sheet content                            |
+| `height`            | `number \| 'auto'`                   | `'auto'`             | Fixed height or content-driven           |
+| `maxHeight`         | `number`                             | `90% of screen`      | Cap for `auto`                           |
+| `backgroundColor`   | `string`                             | `'#FFFFFF'`          | Sheet bg                                 |
+| `backdropColor`     | `string`                             | `'rgba(0,0,0,0.5)'`  | Backdrop color                           |
+| `borderRadius`      | `number`                             | `20`                 | Top corner radius                        |
+| `showHandle`        | `boolean`                            | `true`               | Render the drag handle                   |
+| `handleColor`       | `string`                             | `'#D1D5DB'`          | Drag handle color                        |
+| `enableSwipeDown`   | `boolean`                            | `true`               | Allow swipe-to-dismiss                   |
+| `closeOnBackdrop`   | `boolean`                            | `true`               | Tap backdrop to close                    |
+| `closeOnBackPress`  | `boolean`                            | `true`               | Android back to close                    |
+
+## Accessibility
+
+- `accessibilityViewIsModal` on the wrapper
+- Backdrop dismiss is announced via the back-press handler
+
+## Notes
+
+- For sheets that need keyboard avoidance during text input, the component dismisses the keyboard on close. If you need keyboard-pushing behavior, wrap your content in `KeyboardAvoidingView`.
+- For more advanced gestures (snap points, programmatic positioning), consider `@gorhom/bottom-sheet`. This component intentionally stays minimal.

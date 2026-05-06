@@ -21,15 +21,15 @@ const features = [
   },
   {
     icon: ShieldCheck,
-    title: 'Zero External Deps',
+    title: 'Lightweight by default',
     description:
-      'All components are self-contained with sensible black/white defaults. No theme provider or extra packages required.',
+      'No required peer deps for most components. Self-contained, no theme provider, no extra runtime — your bundle stays small.',
   },
   {
     icon: Layers,
-    title: 'Production Ready',
+    title: 'Built for production',
     description:
-      'TypeScript-first, accessibility-aware, optimized animations with Reanimated. Built for real apps, not demos.',
+      'Designed around real-world best practices: TypeScript strict mode, accessibility roles and states, New Architecture (Fabric) compatible, and covered by an automated test suite.',
   },
   {
     icon: Sparkles,
@@ -49,8 +49,9 @@ export function Features() {
             Built for developers who ship.
           </h2>
           <p className="mt-4 text-lg text-fd-muted-foreground leading-relaxed">
-            Stop wrestling with bloated UI libraries. Get production-ready React Native
-            components, customize them in minutes, and own every line.
+            Every component is designed for production. Best-practice patterns,
+            minimal peer dependencies, and full code ownership — so your screens
+            stay lightweight and your team stays in control.
           </p>
         </div>
 

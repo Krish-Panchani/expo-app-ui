@@ -17,9 +17,9 @@ export function Hero() {
             className="inline-flex animate-fade-up items-center gap-2 rounded-full border bg-fd-card/50 backdrop-blur px-4 py-1.5 text-xs font-medium hover:bg-fd-accent transition-colors"
           >
             <Sparkles className="size-3.5" />
-            <span>Now with 13 components</span>
+            <span>Production-ready · 27+ components</span>
             <span className="text-fd-muted-foreground">·</span>
-            <span className="text-fd-muted-foreground">v1.0.5</span>
+            <span className="text-fd-muted-foreground">New Arch</span>
             <ArrowRight className="size-3" />
           </Link>
 
@@ -32,8 +32,9 @@ export function Hero() {
           </h1>
 
           <p className="animate-fade-up mt-6 text-lg md:text-xl text-fd-muted-foreground max-w-2xl mx-auto leading-relaxed [animation-delay:160ms]">
-            A copy-paste React Native component library for Expo. Beautifully designed,
-            zero dependencies, fully customizable. Your code, your rules.
+            Production-ready React Native components for Expo. TypeScript-first,
+            accessible, lightweight — with minimal peer dependencies. Copy them in,
+            customize freely, ship with confidence.
           </p>
 
           <div className="animate-fade-up mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 [animation-delay:240ms]">

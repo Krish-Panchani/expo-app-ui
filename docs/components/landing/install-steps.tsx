@@ -3,20 +3,20 @@ import { CopyCommand } from './copy-command';
 const steps = [
   {
     n: '01',
-    title: 'Install the CLI',
-    body: 'Run the CLI directly with npx — no global install needed.',
-    cmd: 'npx expo-app-ui init',
+    title: 'Browse the catalog',
+    body: 'See what is available — 27+ production-ready components covering inputs, overlays, navigation, and more.',
+    cmd: 'npx expo-app-ui list',
   },
   {
     n: '02',
     title: 'Add a component',
-    body: 'Pick what you need. Files are copied straight into your project.',
+    body: 'Pick what you need. The CLI copies it into your project and pulls in any required helpers automatically.',
     cmd: 'npx expo-app-ui add button',
   },
   {
     n: '03',
     title: 'Use & customize',
-    body: 'Import, render, and tweak — the code is yours.',
+    body: 'Import, render, and tweak — the code is yours, with strict TypeScript and accessibility wired in.',
     cmd: 'import Button from "@/components/ui/button"',
   },
 ];

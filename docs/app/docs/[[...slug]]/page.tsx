@@ -7,6 +7,8 @@ import {
 } from 'fumadocs-ui/page';
 import { notFound } from 'next/navigation';
 import { getMDXComponents } from '@/components/mdx-components';
+import { MiniFooter } from '@/components/landing/mini-footer';
+import { BuyMeACoffeeButton } from '@/components/bmc-button';
 import type { Metadata } from 'next';
 
 export default async function Page(props: {
@@ -19,12 +21,26 @@ export default async function Page(props: {
   const MDX = (page.data as any).body as React.ComponentType<{ components?: any }>;
 
   return (
-    <DocsPage toc={(page.data as any).toc} full={(page.data as any).full}>
+    <DocsPage
+      toc={(page.data as any).toc}
+      full={(page.data as any).full}
+      tableOfContent={{
+        footer: (
+          <div className="mt-4 pt-4 border-t border-fd-border">
+            <p className="text-xs text-fd-muted-foreground mb-2">
+              Find this useful?
+            </p>
+            <BuyMeACoffeeButton variant="compact" />
+          </div>
+        ),
+      }}
+    >
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
       <DocsBody>
         <MDX components={getMDXComponents()} />
       </DocsBody>
+      <MiniFooter />
     </DocsPage>
   );
 }

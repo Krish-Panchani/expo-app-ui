@@ -35,12 +35,18 @@ async function addHelper(helperName, options = {}) {
   const templatesDir = path.join(packageDir, 'templates');
   
   const kebabName = toKebabCase(helperName);
-  const templatePath = path.join(templatesDir, 'helpers', `${kebabName}.ts`);
-  const targetPath = path.join(config.getHelpersDir(), `${kebabName}.ts`);
+  // Helpers may use camelCase filenames (e.g. normalizeSize.ts). Try kebab first, then raw.
+  const kebabTemplatePath = path.join(templatesDir, 'helpers', `${kebabName}.ts`);
+  const rawTemplatePath = path.join(templatesDir, 'helpers', `${helperName}.ts`);
+  const templatePath = fs.existsSync(kebabTemplatePath)
+    ? kebabTemplatePath
+    : (fs.existsSync(rawTemplatePath) ? rawTemplatePath : kebabTemplatePath);
+  const resolvedFileName = path.basename(templatePath, '.ts');
+  const targetPath = path.join(config.getHelpersDir(), `${resolvedFileName}.ts`);
 
   try {
     logger.debug(`Looking for template: ${templatePath}`);
-    
+
     const content = await readTemplate(templatePath);
     const handleFileExists = createFileExistsHandler(options);
     const validatedPath = await writeFile(
@@ -505,9 +511,10 @@ async function handleAdd(name, options = {}) {
     return await addComponent(name, { logger, config, overwrite, processingSet });
   }
 
-  // Check if it's a helper
-  const helperPath = path.join(templatesDir, 'helpers', `${kebabName}.ts`);
-  if (fs.existsSync(helperPath)) {
+  // Check if it's a helper (try kebab-case, then raw input — helpers may be camelCase)
+  const helperPathKebab = path.join(templatesDir, 'helpers', `${kebabName}.ts`);
+  const helperPathRaw = path.join(templatesDir, 'helpers', `${name}.ts`);
+  if (fs.existsSync(helperPathKebab) || fs.existsSync(helperPathRaw)) {
     return await addHelper(name, { logger, config, overwrite });
   }
 

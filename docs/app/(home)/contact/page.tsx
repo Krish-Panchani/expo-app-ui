@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Mail, MessageCircle, Bug, Lightbulb, Globe } from 'lucide-react';
 import { GithubIcon } from '@/components/icons';
+import { MiniFooter } from '@/components/landing/mini-footer';
 import { SITE_NAME, SITE_URL } from '@/lib/utils';
 
 export const metadata: Metadata = {
@@ -109,6 +110,7 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+      <MiniFooter />
     </main>
   );
 }

@@ -1,0 +1,50 @@
+---
+title: Tabs
+description: Three tab styles (underline, pills, segmented) with animated indicator and scrollable variant.
+---
+
+## Installation
+
+```bash
+npx expo-app-ui add tabs
+```
+
+## Usage
+
+```tsx
+import Tabs from "@/components/ui/tabs";
+import { useState } from "react";
+
+const [tab, setTab] = useState<"all" | "unread" | "archived">("all");
+
+<Tabs
+  value={tab}
+  onChange={setTab}
+  items={[
+    { key: "all",      label: "All" },
+    { key: "unread",   label: "Unread" },
+    { key: "archived", label: "Archived" },
+  ]}
+  variant="underline"
+/>
+```
+
+## Props
+
+| Prop              | Type                                            | Default        | Description                       |
+| ----------------- | ----------------------------------------------- | -------------- | --------------------------------- |
+| `items`           | `TabItem<T>[]`                                  | required       | Tabs to render                    |
+| `value`           | `T`                                             | required       | Selected key                      |
+| `onChange`        | `(key: T) => void`                              | required       | Change handler                    |
+| `variant`         | `'underline' \| 'pills' \| 'segmented'`         | `'underline'`  | Visual style                      |
+| `scrollable`      | `boolean`                                       | `false`        | Horizontal scroll                 |
+| `activeColor`     | `string`                                        | `'#2563EB'`    | Active label / indicator color    |
+| `inactiveColor`   | `string`                                        | `'#6B7280'`    | Inactive label color              |
+| `pillBackground`  | `string`                                        | `'#F3F4F6'`    | Background for `segmented`        |
+
+`TabItem`: `{ key: T; label: string; disabled?: boolean }`.
+
+## Accessibility
+
+- Container: `accessibilityRole="tablist"`
+- Each tab: `accessibilityRole="tab"` with `accessibilityState.selected`

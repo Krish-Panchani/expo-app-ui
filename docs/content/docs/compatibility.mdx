@@ -1,0 +1,64 @@
+---
+title: Compatibility
+description: Expo SDK, React Native, and New Architecture (Fabric/TurboModules) compatibility for expo-app-ui components.
+---
+
+## Versions
+
+| Tool                | Supported                          |
+| ------------------- | ---------------------------------- |
+| Expo SDK            | **52, 53, 54+** (latest)           |
+| React Native        | **0.74+**                          |
+| New Architecture    | ✅ Fabric + TurboModules           |
+| Old Architecture    | ✅ Still supported                 |
+| Platforms           | iOS · Android · Web (component-dependent) |
+| TypeScript          | ✅ Strict mode                     |
+| Node (CLI)          | ≥ 14                               |
+
+## New Architecture (Fabric / TurboModules)
+
+Expo SDK 52+ defaults to the New Architecture. Every component is built and tested against:
+
+```json
+// app.json
+{
+  "expo": {
+    "newArchEnabled": true
+  }
+}
+```
+
+### What's verified
+
+- All components render correctly under Fabric
+- No `findNodeHandle` or other legacy bridge APIs
+- Animations use `react-native-reanimated` v3 (Fabric-ready) where animations are needed
+- No deprecated `PropTypes`, no `componentWillReceiveProps`, no string refs
+
+### Components with native dependencies
+
+Most components are pure JS. The few that touch native:
+
+| Component        | Native dep                                    | New Arch ready |
+| ---------------- | --------------------------------------------- | -------------- |
+| `custom-modal`   | `react-native-reanimated`                     | ✅ (Reanimated 3+) |
+| `loading-bar`    | `react-native-reanimated`                     | ✅             |
+| `bottom-sheet`   | `react-native-reanimated`, `react-native-gesture-handler` | ✅ |
+| `slider`         | `react-native-gesture-handler`                | ✅             |
+| `accordion`      | `react-native-reanimated` (LayoutAnimation fallback) | ✅      |
+
+If you don't have these libraries installed, the CLI will still copy the file — install peers as documented on the component's docs page.
+
+## Web support
+
+Components ship as universal where possible. Mobile-specific behavior (e.g. `BackHandler`, native gestures, keyboard avoidance) gracefully no-ops on web. Components that don't make sense on web (e.g. `birthdate-picker` wheel pickers) are marked **mobile-only** in their docs.
+
+## Reporting compatibility issues
+
+If a component breaks with a specific SDK or architecture flag, please open an issue at
+[github.com/Krish-Panchani/expo-app-ui/issues](https://github.com/Krish-Panchani/expo-app-ui/issues) including:
+
+- Expo SDK version
+- React Native version
+- Whether the New Architecture is enabled
+- Minimal Snack repro

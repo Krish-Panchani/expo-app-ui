@@ -1,0 +1,40 @@
+---
+title: Badge
+description: A compact label for status, counts, and tags. Supports solid, outline, and subtle variants with semantic tones.
+---
+
+## Installation
+
+```bash
+npx expo-app-ui add badge
+```
+
+## Usage
+
+```tsx
+import Badge from "@/components/ui/badge";
+
+<Badge label="New" tone="primary" />
+<Badge label="Beta" variant="outline" tone="warning" />
+<Badge dot tone="success" />
+```
+
+## Props
+
+| Prop                | Type                                                       | Default     | Description                          |
+| ------------------- | ---------------------------------------------------------- | ----------- | ------------------------------------ |
+| `label`             | `string`                                                   | -           | Text shown inside the badge          |
+| `children`          | `ReactNode`                                                | -           | Alternative to `label`               |
+| `variant`           | `'solid' \| 'outline' \| 'subtle'`                         | `'solid'`   | Visual style                         |
+| `tone`              | `'neutral' \| 'primary' \| 'success' \| 'warning' \| 'danger'` | `'neutral'` | Semantic color tone                  |
+| `size`              | `'sm' \| 'md' \| 'lg'`                                     | `'md'`      | Badge size                           |
+| `rounded`           | `boolean`                                                  | `true`      | Pill shape vs square                 |
+| `dot`               | `boolean`                                                  | `false`     | Render only a colored dot            |
+| `style`             | `StyleProp<ViewStyle>`                                     | -           | Container style override             |
+| `textStyle`         | `StyleProp<TextStyle>`                                     | -           | Text style override                  |
+| `accessibilityLabel`| `string`                                                   | -           | Screen-reader label                  |
+
+## Accessibility
+
+- Renders with `accessibilityRole="text"` (or `image` for `dot`)
+- `accessibilityLabel` defaults to `label`

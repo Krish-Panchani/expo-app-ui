@@ -1,0 +1,47 @@
+---
+title: Toast
+description: Lightweight notification that appears from the top or bottom and auto-dismisses.
+---
+
+## Installation
+
+```bash
+npx expo-app-ui add toast
+```
+
+## Usage
+
+```tsx
+import Toast from "@/components/ui/toast";
+import { useState } from "react";
+
+const [show, setShow] = useState(false);
+
+<Toast
+  visible={show}
+  onHide={() => setShow(false)}
+  message="Saved successfully"
+  variant="success"
+  position="top"
+  duration={3000}
+/>
+```
+
+## Props
+
+| Prop             | Type                                                     | Default    | Description                       |
+| ---------------- | -------------------------------------------------------- | ---------- | --------------------------------- |
+| `visible`        | `boolean`                                                | required   | Show/hide                         |
+| `message`        | `string`                                                 | required   | Toast text                        |
+| `variant`        | `'info' \| 'success' \| 'warning' \| 'error'`            | `'info'`   | Color tone                        |
+| `position`       | `'top' \| 'bottom'`                                      | `'top'`    | Anchor edge                       |
+| `duration`       | `number`                                                 | `3000`     | Auto-dismiss ms (`0` = sticky)    |
+| `onHide`         | `() => void`                                             | -          | Called when fade-out completes    |
+| `onPress`        | `() => void`                                             | -          | Optional press handler            |
+| `icon`           | `ReactNode`                                              | -          | Optional leading icon             |
+| `topOffset`      | `number`                                                 | `56`       | Top inset                         |
+| `bottomOffset`   | `number`                                                 | `56`       | Bottom inset                      |
+
+## Accessibility
+
+- `accessibilityRole="alert"` with `accessibilityLiveRegion="polite"` so VoiceOver/TalkBack announces it

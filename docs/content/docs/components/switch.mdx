@@ -1,0 +1,39 @@
+---
+title: Switch
+description: Animated toggle switch with three sizes and accessible switch role.
+---
+
+## Installation
+
+```bash
+npx expo-app-ui add switch
+```
+
+## Usage
+
+```tsx
+import Switch from "@/components/ui/switch";
+import { useState } from "react";
+
+const [on, setOn] = useState(false);
+<Switch value={on} onValueChange={setOn} />
+```
+
+## Props
+
+| Prop               | Type                       | Default     | Description                |
+| ------------------ | -------------------------- | ----------- | -------------------------- |
+| `value`            | `boolean`                  | required    | Current state              |
+| `onValueChange`    | `(v: boolean) => void`     | required    | Change handler             |
+| `disabled`         | `boolean`                  | `false`     | Disable interaction        |
+| `size`             | `'sm' \| 'md' \| 'lg'`     | `'md'`      | Switch size                |
+| `trackColorOn`     | `string`                   | `'#16A34A'` | Track color when on        |
+| `trackColorOff`    | `string`                   | `'#D1D5DB'` | Track color when off       |
+| `thumbColor`       | `string`                   | `'#FFFFFF'` | Thumb color                |
+| `accessibilityLabel`| `string`                  | -           | Screen-reader label        |
+
+## Accessibility
+
+- `accessibilityRole="switch"`
+- `accessibilityState={{ checked, disabled }}`
+- 8px hit slop for easier touch targets

@@ -2,6 +2,33 @@
 
 A UI component library for Expo React Native. Copy components directly into your project and customize them to your needs.
 
+## 🏗️ Designed for production
+
+Every component is built for **real apps** — not demos:
+
+- **TypeScript strict mode** with explicit prop interfaces
+- **Accessibility wired in** — `accessibilityRole`, `accessibilityState`, `accessibilityValue`, `accessibilityLiveRegion`, hit slop on touch targets
+- **New Architecture (Fabric) compatible** — tested on Expo SDK 52+ with `newArchEnabled: true`
+- **Minimal peer dependencies** — most components depend on nothing beyond `react-native` itself, keeping your screens lightweight
+- **Best-practice patterns** — controlled/uncontrolled modes where it matters, `useNativeDriver` where possible, no legacy bridge APIs
+- **Full code ownership** — components are copied into your project; modify, theme, or fork freely
+- **Automated test suite** for the CLI (57+ tests across unit and integration)
+
+The goal: when you copy a component in, you're shipping production code on day one. Customize it, don't fight it.
+
+## ✅ Compatibility
+
+| Tool                | Supported                          |
+| ------------------- | ---------------------------------- |
+| Expo SDK            | **52, 53, 54+** (latest)           |
+| React Native        | **0.74+**                          |
+| New Architecture    | **✅ Fabric + TurboModules**       |
+| Old Architecture    | ✅ Still supported                 |
+| Platforms           | iOS · Android · Web (where noted)  |
+| TypeScript          | ✅ Strict mode                     |
+
+All components are tested against Expo SDK 54 with the **New Architecture enabled** (`newArchEnabled: true` in `app.json`). Components that wrap a third-party library (e.g. `react-native-reanimated`) inherit that library's New Architecture support — these are documented per component.
+
 ## 🎉 Recently Added Components
 
 We've just added **4 new components** to the library:
@@ -23,13 +50,13 @@ npx expo-app-ui add calender
 
 <div align="center">
   
-<img src="https://expo-apps-ui.vercel.app/examples/buttons-example.png" alt="Button Component" width="150" />
-<img src="https://expo-apps-ui.vercel.app/examples/custom-modal-example.gif" alt="Custom Modal" width="150" />
-<img src="https://expo-apps-ui.vercel.app/examples/otp-input-example.gif" alt="OTP Input" width="150" />
-<img src="https://expo-apps-ui.vercel.app/examples/top-loading-bar-example.gif" alt="Top Loading Bar" width="150" />
-<img src="https://expo-apps-ui.vercel.app/examples/accordion-example.gif" alt="Accordion" width="150" />
-<img src="https://expo-apps-ui.vercel.app/examples/auto-scroll-cards-example.gif" alt="Auto Scroll Cards" width="150" />
-<img src="https://expo-apps-ui.vercel.app/examples/celender-example.gif" alt="Calendar" width="150" />
+<img src="https://expo-ui.thunderdevelops.in/examples/buttons-example.png" alt="Button Component" width="150" />
+<img src="https://expo-ui.thunderdevelops.in/examples/custom-modal-example.gif" alt="Custom Modal" width="150" />
+<img src="https://expo-ui.thunderdevelops.in/examples/otp-input-example.gif" alt="OTP Input" width="150" />
+<img src="https://expo-ui.thunderdevelops.in/examples/top-loading-bar-example.gif" alt="Top Loading Bar" width="150" />
+<img src="https://expo-ui.thunderdevelops.in/examples/accordion-example.gif" alt="Accordion" width="150" />
+<img src="https://expo-ui.thunderdevelops.in/examples/auto-scroll-cards-example.gif" alt="Auto Scroll Cards" width="150" />
+<img src="https://expo-ui.thunderdevelops.in/examples/celender-example.gif" alt="Calendar" width="150" />
 
 *Button • Custom Modal • OTP Input • Loading Bar • Accordion • Auto Scroll Cards • Calendar*
 
@@ -37,11 +64,11 @@ npx expo-app-ui add calender
 
 ## 📚 Documentation
 
-**👉 [View Full Documentation →](https://expo-apps-ui.vercel.app)**
+**👉 [View Full Documentation →](https://expo-ui.thunderdevelops.in)**
 
 For complete documentation, usage examples, API references, and detailed instructions, visit our documentation site:
 
-**https://expo-apps-ui.vercel.app**
+**https://expo-ui.thunderdevelops.in**
 
 The documentation includes:
 - 📖 Getting Started Guide
@@ -119,7 +146,7 @@ npx expo-app-ui list
 npx expo-app-ui add custom-text --overwrite
 ```
 
-> 📖 **For detailed usage instructions, examples, and API documentation, visit [expo-apps-ui.vercel.app](https://expo-apps-ui.vercel.app)**
+> 📖 **For detailed usage instructions, examples, and API documentation, visit [expo-ui.thunderdevelops.in](https://expo-ui.thunderdevelops.in)**
 
 ## Project Structure
 
@@ -148,7 +175,7 @@ The CLI automatically detects when a component requires:
 
 When you add a component that uses these dependencies, they will be automatically added to your project.
 
-> 📖 **Learn more about auto-dependency detection in the [documentation](https://expo-apps-ui.vercel.app/docs/cli)**
+> 📖 **Learn more about auto-dependency detection in the [documentation](https://expo-ui.thunderdevelops.in/docs/cli)**
 
 ## Component Templates
 
@@ -192,23 +219,48 @@ module.exports = {
 };
 ```
 
-> 📖 **See the [Getting Started guide](https://expo-apps-ui.vercel.app/docs/getting-started) for detailed setup instructions**
+> 📖 **See the [Getting Started guide](https://expo-ui.thunderdevelops.in/docs/getting-started) for detailed setup instructions**
 
 ## Available Components
 
+**Core**
 - `custom-text` - A customizable Text component with font, color, and spacing props
 - `button` - A flexible button component with variants and icon support
 - `box-view` - A layout component with flexbox props
-- `custom-modal` - An animated modal component
+
+**Display**
+- `badge` - Compact label for status, counts, and tags
+- `avatar` - User avatar with image and initials fallback
+- `skeleton` - Animated placeholder for loading states
 - `profile-pic` - A profile picture component with fallback
 - `progress-bar` - A progress bar component with variants
-- `marquee` - A scrolling marquee component
+
+**Inputs & Forms**
+- `switch` - Animated toggle switch
+- `checkbox` - Accessible checkbox with indeterminate state
+- `radio-group` - Single-select radio group
+- `slider` - Touch-driven value slider
 - `otp-input` - An OTP input component
+- `birthdate-picker` - A native-style date picker for selecting birthdates
+
+**Navigation**
+- `tabs` - Three tab styles (underline, pills, segmented)
+
+**Overlays**
+- `dialog` - Confirmation/alert dialog with actions
+- `tooltip` - Long-press tooltip
+- `custom-modal` - An animated modal component
+- `bottom-sheet` - Modal bottom sheet with swipe-to-dismiss
+- `toast` - Top/bottom auto-dismissing notification
+- `snackbar` - Bottom snackbar with optional action
+
+**Feedback & Motion**
 - `loading-bar` - An animated top loading bar component
+- `marquee` - A scrolling marquee component
 - `accordion` - An expandable accordion component with smooth animations
 - `auto-scroll-cards` - A carousel component with auto-scrolling and manual swipe
-- `birthdate-picker` - A native-style date picker for selecting birthdates
-- `calender` - A flexible calendar component with single date and range selection
+- `calendar` - A flexible calendar component with single date and range selection
+- `calender` - ⚠️ Deprecated typo alias of `calendar`
 
 ## Available Contexts
 
@@ -222,7 +274,7 @@ module.exports = {
 
 - `theme` - Theme constants including colors, fonts, and sizes
 
-> 📖 **View complete documentation, props, examples, and usage for all components at [expo-apps-ui.vercel.app/docs/components](https://expo-apps-ui.vercel.app/docs/components)**
+> 📖 **View complete documentation, props, examples, and usage for all components at [expo-ui.thunderdevelops.in/docs/components](https://expo-ui.thunderdevelops.in/docs/components)**
 
 ## Contributing
 
@@ -235,7 +287,7 @@ To add new components, helpers, constants, or contexts:
 5. Use kebab-case for filenames (e.g., `my-component.tsx`)
 6. The item will be automatically available via the CLI
 
-> 📖 **For contribution guidelines and best practices, visit the [documentation](https://expo-apps-ui.vercel.app)**
+> 📖 **For contribution guidelines and best practices, visit the [documentation](https://expo-ui.thunderdevelops.in)**
 
 ## License
 

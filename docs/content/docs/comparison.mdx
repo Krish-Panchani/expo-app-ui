@@ -1,0 +1,69 @@
+---
+title: Comparison
+description: How expo-app-ui compares to gluestack-UI, React Native Reusables, NativeBase, and React Native Paper.
+---
+
+## TL;DR
+
+- **`expo-app-ui`** — copy-paste components, zero peer deps for most, Expo-first ergonomics, indie-friendly.
+- **gluestack-UI v3** — universal (web + native), accessibility-first, requires NativeWind/Tailwind, larger setup.
+- **React Native Reusables** — shadcn/ui port, Tailwind-only, deep customization, web mental model.
+- **NativeBase** — full design system, npm-installed (not copy-paste), heavier runtime.
+- **React Native Paper** — Material Design 3, opinionated, not Tailwind-based.
+
+## Feature matrix
+
+| Feature                       | **expo-app-ui** | gluestack-UI v3 | RN Reusables | NativeBase | RN Paper |
+| ----------------------------- | --------------- | --------------- | ------------ | ---------- | -------- |
+| Distribution model            | Copy-paste (CLI)| Copy-paste (CLI)| Copy-paste   | npm        | npm      |
+| Code ownership                | ✅ Full          | ✅ Full          | ✅ Full       | ❌          | ❌        |
+| Styling system                | StyleSheet      | NativeWind      | NativeWind   | Tokens     | Theme    |
+| Tailwind required             | ❌               | ✅               | ✅            | ❌          | ❌        |
+| Web support                   | Mostly ✅        | ✅ (universal)   | ✅            | ✅          | ✅        |
+| New Architecture (Fabric)     | ✅               | ✅               | ✅            | ⚠️ partial  | ✅        |
+| Peer deps required            | None for most   | NativeWind, etc.| NativeWind   | Many       | Several  |
+| Theming / dark mode           | Per-prop        | Built-in        | Built-in     | Built-in   | Built-in |
+| Accessibility                 | Per-component   | First-class     | First-class  | Good       | Good     |
+| Bundle size impact            | Tiny (only what you copy) | Tiny     | Tiny         | Larger     | Medium   |
+| Auto-dependency detection     | ✅ Built-in      | ❌               | ❌            | n/a        | n/a      |
+| TypeScript                    | ✅ Strict        | ✅               | ✅            | ✅          | ✅        |
+| Component count               | ~25             | 30+             | 25+          | 60+        | 40+      |
+
+## When to pick each
+
+### Pick **expo-app-ui** if…
+
+- You want code you fully own, with **no styling framework lock-in**.
+- You're building an **Expo** app (SDK 52+) and want sensible defaults.
+- You don't want to set up NativeWind/Tailwind just to get a button.
+- You like the **auto-dependency** workflow (helpers/constants installed for you).
+- You're a solo dev or small team prioritizing shipping speed.
+
+### Pick **gluestack-UI v3** if…
+
+- You're already on NativeWind/Tailwind and want a **universal** (web + native) library.
+- Accessibility and i18n are non-negotiable from day one.
+- You're building enterprise apps with a design-system team.
+
+### Pick **React Native Reusables** if…
+
+- You love shadcn/ui's mental model on the web and want the same on native.
+- Your team is already deep on Tailwind.
+
+### Pick **NativeBase / RN Paper** if…
+
+- You want a fully opinionated design system out of the box.
+- You're OK with an npm dependency and the runtime cost it brings.
+
+## Honest tradeoffs of `expo-app-ui`
+
+We won't oversell. Things to know:
+
+- **No theme provider yet.** Components accept color props; a `ThemeProvider` is on the roadmap.
+- **Smaller component count** than gluestack/Paper. Adding new ones is straightforward — see [contributing](https://github.com/Krish-Panchani/expo-app-ui/blob/main/CONTRIBUTING.md).
+- **Styling is StyleSheet-based**, not Tailwind. If you prefer utility classes, RN Reusables or gluestack are better fits.
+- **No web-first universal stories** for every component (e.g. `birthdate-picker` is mobile-only).
+
+## Migration
+
+Mixing `expo-app-ui` with another library is fine — components are isolated files in your repo. There's no global theme conflict, no provider you have to wrap your tree in.
