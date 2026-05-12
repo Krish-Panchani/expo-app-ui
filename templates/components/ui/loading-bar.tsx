@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
+import { View, StyleSheet, Dimensions, type StyleProp, type ViewStyle } from "react-native";
 import Animated, {
   Easing,
   useSharedValue,
@@ -16,9 +16,13 @@ const DURATION = 1200;
 
 interface LoadingBarProps {
   color?: string;
+  /** Root wrapper (e.g. zIndex, position). Applied after base layout. */
+  containerStyle?: StyleProp<ViewStyle>;
+  /** The animated strip. Applied last so width/height from animation can be overridden when needed. */
+  barStyle?: StyleProp<ViewStyle>;
 }
 
-const LoadingBar: React.FC<LoadingBarProps> = ({ color = "#007AFF" }) => {
+const LoadingBar: React.FC<LoadingBarProps> = ({ color = "#0a0a0a", containerStyle, barStyle }) => {
   const translateX = useSharedValue(-PROGRESS_WIDTH);
 
   useEffect(() => {
@@ -48,8 +52,8 @@ const LoadingBar: React.FC<LoadingBarProps> = ({ color = "#007AFF" }) => {
   });
 
   return (
-    <View style={styles.loadingContainer}>
-      <Animated.View style={[styles.loadingBar, { backgroundColor: color }, animatedStyle]} />
+    <View style={[styles.loadingContainer, containerStyle]}>
+      <Animated.View style={[styles.loadingBar, { backgroundColor: color }, animatedStyle, barStyle]} />
     </View>
   );
 };

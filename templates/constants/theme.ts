@@ -1,3 +1,8 @@
+/**
+ * Design tokens for apps using this kit. Most UI components also accept explicit
+ * `style` / `textStyle` (and color props like `backgroundColor`, `trackColorOn`, `theme`, etc.)
+ * so you can override per instance without editing this file.
+ */
 // import { normalizeSize } from "../helpers/normalizeSize";
 
 // Default colors - customize as needed
